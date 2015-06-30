@@ -1,0 +1,4 @@
+#shelf  scion				version	    depot location													scion location in depot
+
+nuodio 	executive::base  	master 		https://github.com/lepton-phlb/nuodio.scion.git            		executive/base
+
