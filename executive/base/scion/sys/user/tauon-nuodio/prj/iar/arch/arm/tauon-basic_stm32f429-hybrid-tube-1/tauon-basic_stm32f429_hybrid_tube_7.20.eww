@@ -17,6 +17,10 @@
     <batchDefinition>
       <name>all debug</name>
       <member>
+        <project>bsp_hybrid_tube_7.30</project>
+        <configuration>Debug</configuration>
+      </member>
+      <member>
         <project>dev_stm32f4xx_7.20</project>
         <configuration>Debug</configuration>
       </member>
