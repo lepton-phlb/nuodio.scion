@@ -16,6 +16,9 @@ Compiler Directive
 
 //force definition of external clock (8MHz) on discovery board (see in stm32f4xx.h)
 #define HSE_VALUE    ((uint32_t)8000000)
+#ifndef STM32F429xx
+   #define STM32F429xx
+#endif
 //force definition of cpu device
 #define __tauon_cpu_device__ __tauon_cpu_device_cortexM4_stm32f4__
 

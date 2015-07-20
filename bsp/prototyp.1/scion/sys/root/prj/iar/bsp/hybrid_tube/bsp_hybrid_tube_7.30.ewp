@@ -17,7 +17,7 @@
         <debug>1</debug>
         <option>
           <name>ExePath</name>
-          <state>C:\tauon\building\output\$PROJ_FNAME$\$CONFIG_NAME$\Exe</state>
+          <state>C:\tauon\building\output\$PROJ_FNAME$\$CONFIG_NAME$\Lib</state>
         </option>
         <option>
           <name>ObjPath</name>
@@ -175,6 +175,7 @@
           <state>_OS_LIBMODE_R</state>
           <state>NDEBUG</state>
           <state>USE_STDPERIPH_DRIVER</state>
+          <state>STM32F429xx</state>
         </option>
         <option>
           <name>CCPreprocFile</name>
@@ -317,6 +318,8 @@
           <state>c:/tauon/sys/root/src/kernel/fs/yaffs/core</state>
           <state>c:/tauon/sys/root/src/kernel/fs/yaffs/core/direct</state>
           <state>c:/tauon/sys/root/src/kernel/net/uip2.5</state>
+          <state>c:/tauon/sys/root/src/kernel/dev/arch/cortexm\stm32f4xx/cubemx_hal_driver/inc</state>
+          <state>c:/tauon/sys/root/src/kernel/dev/arch/cortexm\stm32f4xx/cubemx_hal_driver/inc/legacy</state>
         </option>
         <option>
           <name>CCStdIncCheck</name>
@@ -952,7 +955,7 @@
         </option>
         <option>
           <name>IarchiveOutput</name>
-          <state>C:\tauon\building\output\$PROJ_FNAME$\$CONFIG_NAME$\Exe\bsp_hybrid_tube_7.30.a</state>
+          <state>C:\tauon\building\output\$PROJ_FNAME$\$CONFIG_NAME$\Lib\bsp_hybrid_tube_7.30.a</state>
         </option>
       </data>
     </settings>
@@ -1923,7 +1926,28 @@
           <group>
             <name>dev_hybrid_tube_peripherals</name>
             <file>
+              <name>$PROJ_DIR$\..\..\..\..\src\kernel\dev\bsp\hybrid_tube\dev_hybrid_tube_peripherals\dev_hybrid_tube_oled_io.c</name>
+            </file>
+            <file>
+              <name>$PROJ_DIR$\..\..\..\..\src\kernel\dev\bsp\hybrid_tube\dev_hybrid_tube_peripherals\dev_hybrid_tube_spi_5.c</name>
+            </file>
+            <file>
+              <name>$PROJ_DIR$\..\..\..\..\src\kernel\dev\bsp\hybrid_tube\dev_hybrid_tube_peripherals\dev_hybrid_tube_spi_cs.c</name>
+            </file>
+            <file>
+              <name>$PROJ_DIR$\..\..\..\..\src\kernel\dev\bsp\hybrid_tube\dev_hybrid_tube_peripherals\dev_hybrid_tube_spi_cs.h</name>
+            </file>
+            <file>
               <name>$PROJ_DIR$\..\..\..\..\src\kernel\dev\bsp\hybrid_tube\dev_hybrid_tube_peripherals\dev_hybrid_tube_uart_3.c</name>
+            </file>
+          </group>
+          <group>
+            <name>cubemx_hal</name>
+            <file>
+              <name>$PROJ_DIR$\..\..\..\..\src\kernel\dev\bsp\hybrid_tube\cubemx_hal\gpio.c</name>
+            </file>
+            <file>
+              <name>$PROJ_DIR$\..\..\..\..\src\kernel\dev\bsp\hybrid_tube\cubemx_hal\spi.c</name>
             </file>
           </group>
         </group>

@@ -51,7 +51,7 @@
       </target>
 
       <!-- bin path (__KERNEL_ENV_PATH)-->
-      <env path="/usr;/usr/sbin;/usr/bin;usr/bin/net" />
+      <env path="/usr;/usr/sbin;/usr/bin;usr/bin/nuodio" />
 
       <!-- use ip stack (__KERNEL_NET_UIP)-->
       <network use="off" />
@@ -97,10 +97,23 @@
 
 <target name="cortexm_lepton">
    <devices>
-	   <!-- /dev/board -->
-     <dev name="dev_hybrid_tube_board_map"      use="on"/>
+    
+      <!-- /dev/cpu0 -->
+      <dev name="dev_stm32f4xx_cpu_x_map"        use="on"/>
+	    <!-- /dev/board -->
+      <dev name="dev_hybrid_tube_board_map"      use="on"/>
       <!-- /dev/ttys3 -->
       <dev name="dev_hybrid_tube_uart_s3_map"   use="on"/>
+      <!-- /dev/spi5 -->
+      <dev name="dev_hybrid_tube_spi_5_map"     use="on"/>
+      <!-- /dev/spics -->
+      <dev name="dev_hybrid_tube_spi_cs_map"    use="on"/>
+      <!-- /dev/oledio -->
+      <dev name="dev_hybrid_tube_oled_io_map"    use="on"/>
+      <!-- /dev/lcd0 -->
+      <dev name="dev_oled_ssd1322_map"          use="on"/>
+      <!-- /dev/tty0 -->
+      <dev name="dev_tty_map"                   use="on"/>
 	   <!-- /dev/itm0 -->
       <dev name="dev_cmsis_itm0_map"            use="on"/>
 	   <!-- /dev/debug -->
@@ -160,13 +173,13 @@
 <!-- user binaries. -->
 <!-- /usr/bin -->
 <binaries src_path="bin" dest_path="bin">
-        <bin name="test2"        stack="1024"    priority="100" timeslice="5" />
+        <bin name="tstboard"        stack="2048"    priority="100"  timeslice="5" />
         <!--bin name="udpsrvd"      stack="2048"    priority="10" timeslice="5" /-->
 </binaries>
 
 <!-- /usr/bin -->
-<binaries src_path="bin/tst" dest_path="bin/tst">
-        <bin name="tsteth"        stack="2048"    priority="100"  timeslice="5" />
+<binaries src_path="bin/nuodio" dest_path="bin/nuodio">
+        <bin name="tstboard"        stack="2048"    priority="100"  timeslice="5" />
 </binaries>
 
 <files>

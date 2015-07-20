@@ -45,22 +45,21 @@ either the MPL or the [eCos GPL] License."
 
 typedef enum
 {
-  GPIO_ID_TXD3,
+  GPIO_ID_TXD3, 
   GPIO_ID_RXD3,
 
   GPIO_ID_TXD6,
   GPIO_ID_RXD6,
 
-  GPIO_ID_MISO,
-  GPIO_ID_MOSI,
-  GPIO_ID_SCK,
+  GPIO_ID_OLED_MOSI,
+  GPIO_ID_OLED_SCLK,
+  GPIO_ID_OLED_DC,
+  GPIO_ID_OLED_CS,
+  GPIO_ID_OLED_RESET,
 
-  GPIO_ID_FLASH_CS,
-
-  GPIO_ID_LED1,
-  GPIO_ID_LED2,
-
-  GPIO_ID_WKUP,
+  GPIO_ID_LED_R,
+  GPIO_ID_LED_V,
+  GPIO_ID_LED_B,
 
   GPIO_NB
 } _GPIO_LIST;
@@ -71,17 +70,19 @@ typedef enum
 #define GPIO_TXD6     (&Gpio_Descriptor[GPIO_ID_TXD6])
 #define GPIO_RXD6     (&Gpio_Descriptor[GPIO_ID_RXD6])
 
-#define GPIO_MISO     (&Gpio_Descriptor[GPIO_ID_MISO])
-#define GPIO_MOSI     (&Gpio_Descriptor[GPIO_ID_MOSI])
-#define GPIO_SCK      (&Gpio_Descriptor[GPIO_ID_SCK])
+//#define GPIO_MISO     (&Gpio_Descriptor[GPIO_ID_MISO])
+#define GPIO_OLED_MOSI     (&Gpio_Descriptor[GPIO_ID_OLED_MOSI])
+#define GPIO_OLED_SCLK     (&Gpio_Descriptor[GPIO_ID_OLED_SCLK])
+#define GPIO_OLED_DC       (&Gpio_Descriptor[GPIO_ID_OLED_DC])
+#define GPIO_OLED_CS       (&Gpio_Descriptor[GPIO_ID_OLED_CS])
+#define GPIO_OLED_RESET    (&Gpio_Descriptor[GPIO_ID_OLED_RESET])
 
-#define GPIO_FLASH_CS (&Gpio_Descriptor[GPIO_ID_FLASH_CS])
 
-#define GPIO_LED1  (&Gpio_Descriptor[GPIO_ID_LED1])
-#define GPIO_LED2  (&Gpio_Descriptor[GPIO_ID_LED2])
-#define GPIO_LED3  (&Gpio_Descriptor[GPIO_ID_LED3])
 
-#define GPIO_WKUP   (&Gpio_Descriptor[GPIO_ID_WKUP])
+#define GPIO_LED_R  (&Gpio_Descriptor[GPIO_ID_LED_R])
+#define GPIO_LED_V  (&Gpio_Descriptor[GPIO_ID_LED_V])
+#define GPIO_LED_B  (&Gpio_Descriptor[GPIO_ID_LED_B])
+
 
 /*******************************************************************************
 * UART
@@ -95,8 +96,8 @@ typedef enum
   UART_NB
 } _UART_LIST;
 
-#define UART_3  (&Uart_Descriptor[UART_ID_3])
-#define UART_6  (&Uart_Descriptor[UART_ID_6])
+//#define UART_3  (&Uart_Descriptor[UART_ID_3])
+//#define UART_6  (&Uart_Descriptor[UART_ID_6])
 
 
 /*******************************************************************************
@@ -104,11 +105,11 @@ typedef enum
 *******************************************************************************/
 typedef enum
 {
-  SPI_ID_FLASH,
+  SPI_ID_OLED,
   SPI_NB
 } _SPI_LIST;
 
-#define SPI_FLASH   (&Spi_Descriptor[SPI_ID_FLASH])
+//#define SPI_OLED   (&Spi_Descriptor[SPI_ID_OLED])
 
 /*******************************************************************************
 * SPIFLASH

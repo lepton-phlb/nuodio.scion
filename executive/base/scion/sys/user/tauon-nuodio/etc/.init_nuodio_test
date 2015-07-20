@@ -1,2 +1,7 @@
 #nuodio hybride tube prototyp.1.
 uname -a
+mount /dev/oledio /dev/spi5 /dev/spi5.0
+mount /dev/lcd0 /dev/spi5.0 /dev/lcd0.0
+mount /dev/tty0 /dev/lcd0.0 /dev/tty0.0
+date > /dev/tty0.0
+echo nuodio > /dev/tty0.0

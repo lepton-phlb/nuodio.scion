@@ -8,6 +8,9 @@
     <path>$WS_DIR$\..\..\..\..\..\..\..\root\prj\iar\arch\arm\dev\stm32f4xx\dev_stm32f4xx_7.20.ewp</path>
   </project>
   <project>
+    <path>$WS_DIR$\..\..\..\..\..\..\..\root\prj\iar\nuodio\binaries\nuodio_binaries_7.30.ewp</path>
+  </project>
+  <project>
     <path>$WS_DIR$\..\..\..\..\..\..\..\root\prj\iar\arch\arm\tauon\tauon_7.20.ewp</path>
   </project>
   <project>
@@ -27,6 +30,10 @@
       <member>
         <project>tauon_7.20</project>
         <configuration>tauon-kernel-cortex-m4-debug</configuration>
+      </member>
+      <member>
+        <project>nuodio_binaries_7.30</project>
+        <configuration>Debug</configuration>
       </member>
       <member>
         <project>tauon-basic_stm32f429_hybrid_tube_7.20</project>

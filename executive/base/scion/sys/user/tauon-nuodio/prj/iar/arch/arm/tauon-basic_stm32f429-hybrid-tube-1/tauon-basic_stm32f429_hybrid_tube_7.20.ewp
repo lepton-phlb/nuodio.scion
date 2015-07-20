@@ -17,15 +17,15 @@
         <debug>1</debug>
         <option>
           <name>ExePath</name>
-          <state>Output\Debug\Exe</state>
+          <state>C:\tauon\building\output\$PROJ_FNAME$\$CONFIG_NAME$\Exe</state>
         </option>
         <option>
           <name>ObjPath</name>
-          <state>Output\Debug\Obj</state>
+          <state>C:\tauon\building\output\$PROJ_FNAME$\$CONFIG_NAME$\Obj</state>
         </option>
         <option>
           <name>ListPath</name>
-          <state>Output\Debug\List</state>
+          <state>C:\tauon\building\output\$PROJ_FNAME$\$CONFIG_NAME$\List</state>
         </option>
         <option>
           <name>Variant</name>
@@ -610,7 +610,7 @@
         </option>
         <option>
           <name>OOCOutputFile</name>
-          <state>c.srec</state>
+          <state>tauon-basic_stm32f429_hybrid_tube_7.20.srec</state>
         </option>
         <option>
           <name>OOCCommandLineProducer</name>
@@ -2862,21 +2862,30 @@
   <group>
     <name>tauon</name>
     <group>
+      <name>building</name>
+      <group>
+        <name>output</name>
+        <group>
+          <name>lib</name>
+          <file>
+            <name>$PROJ_DIR$\..\..\..\..\..\..\..\..\building\output\bsp_hybrid_tube_7.30\Debug\Lib\bsp_hybrid_tube_7.30.a</name>
+          </file>
+          <file>
+            <name>$PROJ_DIR$\..\..\..\..\..\..\..\..\building\output\dev_stm32f4xx_7.20\Debug\Lib\dev_stm32f4xx_7.20.a</name>
+          </file>
+          <file>
+            <name>$PROJ_DIR$\..\..\..\..\..\..\..\..\building\output\nuodio_binaries_7.30\Debug\Lib\nuodio_binaries_7.30.a</name>
+          </file>
+          <file>
+            <name>$PROJ_DIR$\..\..\..\..\..\..\..\..\building\output\tauon_7.20\tauon-kernel-cortex-m4-debug\Lib\tauon_7.20.a</name>
+          </file>
+        </group>
+      </group>
+    </group>
+    <group>
       <name>lib</name>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\..\..\..\..\building\output\bsp_hybrid_tube_7.30\Debug\Exe\bsp_hybrid_tube_7.30.a</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\..\..\..\root\prj\iar\arch\arm\dev\stm32f4xx\Debug\Exe\dev_stm32f4xx_7.20.a</name>
-      </file>
-      <file>
         <name>$PROJ_DIR$\..\..\..\..\..\..\..\root\src\kernel\core\ucore\embOSCXM4_386\Lib\os7m_tl__sp.a</name>
-        <excluded>
-          <configuration>freertos-debug</configuration>
-        </excluded>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\..\..\..\root\prj\iar\arch\arm\tauon\tauon-kernel-cortex-m4-debug\Exe\tauon_7.20.a</name>
         <excluded>
           <configuration>freertos-debug</configuration>
         </excluded>
@@ -2892,72 +2901,6 @@
       <name>sys</name>
       <group>
         <name>root</name>
-        <group>
-          <name>bin</name>
-          <group>
-            <name>net</name>
-            <group>
-              <name>ftpd</name>
-              <file>
-                <name>$PROJ_DIR$\..\..\..\..\..\..\..\root\src\bin\net\ftpd\ftpd.c</name>
-                <excluded>
-                  <configuration>Debug</configuration>
-                </excluded>
-              </file>
-              <file>
-                <name>$PROJ_DIR$\..\..\..\..\..\..\..\root\src\bin\net\ftpd\ftpd.h</name>
-                <excluded>
-                  <configuration>Debug</configuration>
-                </excluded>
-              </file>
-              <file>
-                <name>$PROJ_DIR$\..\..\..\..\..\..\..\root\src\bin\net\ftpd\ftpd_priv.h</name>
-              </file>
-              <file>
-                <name>$PROJ_DIR$\..\..\..\..\..\..\..\root\src\bin\net\ftpd\ls.c</name>
-                <excluded>
-                  <configuration>Debug</configuration>
-                </excluded>
-              </file>
-            </group>
-            <group>
-              <name>mongoose</name>
-              <excluded>
-                <configuration>freertos-debug</configuration>
-              </excluded>
-              <file>
-                <name>$PROJ_DIR$\..\..\..\..\..\..\..\root\src\bin\net\mongoose\mongoose.c</name>
-                <excluded>
-                  <configuration>Debug</configuration>
-                </excluded>
-              </file>
-              <file>
-                <name>$PROJ_DIR$\..\..\..\..\..\..\..\root\src\bin\net\mongoose\mongoose.h</name>
-                <excluded>
-                  <configuration>Debug</configuration>
-                </excluded>
-              </file>
-              <file>
-                <name>$PROJ_DIR$\..\..\..\..\..\..\..\root\src\bin\net\mongoose\mongoosed.c</name>
-                <excluded>
-                  <configuration>Debug</configuration>
-                </excluded>
-              </file>
-            </group>
-            <file>
-              <name>$PROJ_DIR$\..\..\..\..\..\..\..\root\src\bin\net\telnetd.c</name>
-            </file>
-          </group>
-          <group>
-            <name>tst</name>
-            <file>
-              <name>$PROJ_DIR$\..\..\..\..\..\..\..\root\src\bin\tst\tsteth.c</name>
-            </file>
-          </group>
-          <file>
-            <name>$PROJ_DIR$\..\..\..\..\..\..\..\root\src\bin\test2.c</name>
-          </file>
-        </group>
         <group>
           <name>kernel</name>
           <group>
@@ -3175,9 +3118,6 @@
       </group>
       <group>
         <name>user</name>
-        <group>
-          <name>bin</name>
-        </group>
       </group>
     </group>
   </group>

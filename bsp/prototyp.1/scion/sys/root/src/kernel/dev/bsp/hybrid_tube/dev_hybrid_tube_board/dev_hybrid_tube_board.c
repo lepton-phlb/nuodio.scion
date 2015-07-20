@@ -39,7 +39,6 @@ Includes
 #include "kernel/fs/vfs/vfsdev.h"
 #include "kernel/core/ioctl_board.h"
 
-
 #include "kernel/dev/arch/cortexm/stm32f4xx/driverlib/stm32f4xx.h"
 #include "kernel/dev/arch/cortexm/stm32f4xx/types.h"
 #include "kernel/dev/arch/cortexm/stm32f4xx/gpio.h"
@@ -47,9 +46,12 @@ Includes
 #include "kernel/dev/arch/cortexm/stm32f4xx/uart.h"
 #include "kernel/dev/arch/cortexm/stm32f4xx/spi.h"
 
+#include "kernel/dev/arch/cortexm/stm32f4xx/driverlib/stm32f4xx_hal_gpio_ex.h"
+
 #include "kernel/dev/arch/cortexm/stm32f4xx/dev_stm32f4xx/dev_stm32f4xx_uart_x.h"
 #include "kernel/dev/arch/cortexm/stm32f4xx/dev_stm32f4xx/dev_stm32f4xx_spi_x.h"
 
+#include "dev_hybrid_tube_board.h"
 
 /*===========================================
 Global Declaration
@@ -82,27 +84,25 @@ dev_map_t dev_hybrid_tube_board_map={
    dev_hybrid_tube_board_ioctl //ioctl
 };
 
-// GPIO definition  see in target.h
+// GPIO definition  see in dev_hybrid_board.h
 const _Gpio_Descriptor Gpio_Descriptor[] = {
   {GPIO_TYPE_STD, GPIOD,  GPIO_Pin_8,   0,  GPIO_MODE_IN,       0},   // GPIO_TXD3
   {GPIO_TYPE_STD, GPIOD,  GPIO_Pin_9,   0,  GPIO_MODE_IN,       0},   // GPIO_RXD3
-//   {GPIO_TYPE_STD, GPIOC,  GPIO_Pin_10,   0,  GPIO_FCT_IN,  0},   // GPIO_TXD3
-//   {GPIO_TYPE_STD, GPIOC,  GPIO_Pin_11,   0,  GPIO_FCT_IN,  0},   // GPIO_RXD3
 
   {GPIO_TYPE_STD, GPIOC,  GPIO_Pin_6,   0,  GPIO_MODE_IN,       0},   // GPIO_TXD6
   {GPIO_TYPE_STD, GPIOC,  GPIO_Pin_7,   0,  GPIO_MODE_IN,       0},   // GPIO_RXD6
+  
+  {GPIO_TYPE_STD, GPIOF,  GPIO_Pin_9,   0,  GPIO_MODE_IN,       0},   // GPIO_ID_OLED_MOSI
+  {GPIO_TYPE_STD, GPIOF,  GPIO_Pin_7,   0,  GPIO_MODE_IN,       0},   // GPIO_ID_OLED_SCLK
+  {GPIO_TYPE_STD, GPIOF,  GPIO_Pin_6,   1,  GPIO_MODE_OUT,      1},   // GPIO_ID_OLED_DC
+  {GPIO_TYPE_STD, GPIOF,  GPIO_Pin_5,   1,  GPIO_MODE_OUT,      1},   // GPIO_ID_OLED_CS
+  {GPIO_TYPE_STD, GPIOF,  GPIO_Pin_4,   1,  GPIO_MODE_OUT,      1},   // GPIO_ID_OLED_RESET
+ 
 
-  {GPIO_TYPE_STD, GPIOC,  GPIO_Pin_11,  0,  GPIO_MODE_IN,       0},   // GPIO_ID_MISO
-  {GPIO_TYPE_STD, GPIOC,  GPIO_Pin_12,  0,  GPIO_MODE_IN,       0},   // GPIO_ID_MOSI
-  {GPIO_TYPE_STD, GPIOC,  GPIO_Pin_10,  0,  GPIO_MODE_IN,       0},   // GPIO_ID_SCK
-
-  {GPIO_TYPE_STD, GPIOF,  GPIO_Pin_8,   1,  GPIO_MODE_OUT,      1},   // GPIO_FLASH_CS
-
-  {GPIO_TYPE_STD, GPIOF,  GPIO_Pin_6,   1,  GPIO_MODE_OUT,      1},   // GPIO_LED1
-  {GPIO_TYPE_STD, GPIOF,  GPIO_Pin_7,   1,  GPIO_MODE_OUT,      1},   // GPIO_LED2
-
-  {GPIO_TYPE_STD, GPIOA,  GPIO_Pin_0,   0,  GPIO_MODE_IN,       0}    // GPIO_WKUP
-
+  {GPIO_TYPE_STD, GPIOE,  GPIO_Pin_13,   1,  GPIO_MODE_OUT,      1},   // GPIO_LED_R
+  {GPIO_TYPE_STD, GPIOE,  GPIO_Pin_14,   1,  GPIO_MODE_OUT,      1},   // GPIO_LED_V
+  {GPIO_TYPE_STD, GPIOE,  GPIO_Pin_15,   1,  GPIO_MODE_OUT,      1},   // GPIO_LED_B
+  
 };
 
 
@@ -120,11 +120,13 @@ board_stm32f4xx_uart_info_t stm32f4xx_uart_6=
    .uart_descriptor={USART6, RCC_APB2PeriphClockCmd, RCC_APB2Periph_USART6, USART6_IRQn, DMA2_Stream1, DMA_Channel_5, DMA2_Stream1_IRQn, GPIO_TXD6, GPIO_RXD6, GPIO_AF_USART6, &Uart_Ctrl[UART_ID_6]}   // UART_3
 };
 
-// spi 3
-board_stm32f4xx_spi_info_t stm32f4xx_spi_3=
+// spi 5
+board_stm32f4xx_spi_info_t hybrid_tube_spi_5=
 {
-   .spi_descriptor={SPI3,  RCC_APB1PeriphClockCmd, RCC_APB1Periph_SPI3,  GPIO_MISO,  GPIO_MOSI,  GPIO_SCK, GPIO_AF_SPI3, 3,  20000000} // SPI_FLASH   // SPI1
+   .spi_descriptor={SPI5,  RCC_APB2PeriphClockCmd, RCC_APB2ENR_SPI5EN,  (void*)0,  GPIO_OLED_MOSI,  GPIO_OLED_SCLK, GPIO_AF5_SPI5, 0, 20000000} // SPI_FLASH   // SPI1
 };
+
+
 
 
 /*===========================================
@@ -147,6 +149,7 @@ static void gpio_startup_init(void)
 
   /* Initialize GPIO */
   for (i = 0 ; i < GPIO_NB ; i++) if (Gpio_Descriptor[i].Init) gpio_init((&Gpio_Descriptor[i]));
+        
 }
 
 /*-------------------------------------------
@@ -160,6 +163,15 @@ static void gpio_startup_init(void)
 int dev_hybrid_tube_board_load(void){
    gpio_startup_init();
    dma_startup_init();
+   //set on RVB led
+   gpio_reset(GPIO_LED_R);
+   gpio_reset(GPIO_LED_V);
+   gpio_reset(GPIO_LED_B);
+   //
+   gpio_set(GPIO_LED_R);
+   gpio_set(GPIO_LED_V);
+   gpio_set(GPIO_LED_B);
+   
    return 0;
 }
 

@@ -105,9 +105,6 @@ void DMA1_Stream1_IRQHandler(void)
 ---------------------------------------------*/
 static int dev_hybrid_tube_uart_3_load(void) {
    
-   #if (__tauon_compiler__==__compiler_keil_arm__)
-      memcpy(&stm32f4xx_uart_3.uart_descriptor,&uart_descriptor,sizeof(_Uart_Descriptor));
-   #endif
    stm32f4xx_uart_3.uart_descriptor.board_uart_info=&stm32f4xx_uart_3;
    stm32f4xx_uart_3.desc_r=-1;
    stm32f4xx_uart_3.desc_w=-1;
