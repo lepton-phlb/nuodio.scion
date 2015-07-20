@@ -1,4 +1,5 @@
 #shelf  scion					version	    depot location													scion location in depot
 nuodio  hybrid.tube::prototyp.1 master      https://github.com/lepton-phlb/nuodio.scion.git                 bsp/prototyp.1
 nuodio 	hybrid.tube::base  		master 		https://github.com/lepton-phlb/nuodio.scion.git            		executive/base
+nuodio 	hybrid.tube::binaries   master      https://github.com/lepton-phlb/nuodio.scion.git                 binaries
 
