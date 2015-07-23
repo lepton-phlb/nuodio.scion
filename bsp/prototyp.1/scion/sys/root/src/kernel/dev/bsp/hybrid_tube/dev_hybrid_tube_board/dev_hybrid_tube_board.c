@@ -50,6 +50,7 @@ Includes
 
 #include "kernel/dev/arch/cortexm/stm32f4xx/dev_stm32f4xx/dev_stm32f4xx_uart_x.h"
 #include "kernel/dev/arch/cortexm/stm32f4xx/dev_stm32f4xx/dev_stm32f4xx_spi_x.h"
+#include "kernel/dev/bsp/hybrid_tube/dev_hybrid_tube_peripherals/dev_rotary_encoder_x.h"
 
 #include "dev_hybrid_tube_board.h"
 
@@ -127,11 +128,75 @@ board_stm32f4xx_spi_info_t hybrid_tube_spi_5=
 };
 
 
+rotary_encoder_info_t rotary_encoder_info_1 ={
+  .pin_a.gpio_bank_no=GPIOG,
+  .pin_a.gpio_pin_no=GPIO_Pin_3,
+  .pin_b.gpio_bank_no=GPIOG,
+  .pin_b.gpio_pin_no=GPIO_Pin_2,
+  .pin_s.gpio_bank_no=GPIOG,
+  .pin_s.gpio_pin_no=GPIO_Pin_4,
+  .timer_no=TIM4,
+  .timer_gpio_af= GPIO_AF_TIM4,
+  .exti_pin.src_gpio_bank_no=EXTI_PortSourceGPIOG,
+  .exti_pin.src_gpio_pin_no= EXTI_PinSource2
+};
+
+
+rotary_encoder_info_t rotary_encoder_info_2 ={
+  .pin_a.gpio_bank_no=GPIOG,
+  .pin_a.gpio_pin_no=GPIO_Pin_6,
+  .pin_b.gpio_bank_no=GPIOG,
+  .pin_b.gpio_pin_no=GPIO_Pin_5,
+  .pin_s.gpio_bank_no=GPIOG,
+  .pin_s.gpio_pin_no=GPIO_Pin_7,
+  .exti_pin.src_gpio_bank_no=EXTI_PortSourceGPIOG,
+  .exti_pin.src_gpio_pin_no=EXTI_PinSource5
+};
+
+rotary_encoder_info_t rotary_encoder_info_3 ={
+  .pin_a.gpio_bank_no=GPIOH,
+  .pin_a.gpio_pin_no=GPIO_Pin_15,
+  .pin_b.gpio_bank_no=GPIOH,
+  .pin_b.gpio_pin_no=GPIO_Pin_14,
+  .pin_s.gpio_bank_no=GPIOH,
+  .pin_s.gpio_pin_no=GPIO_Pin_13,
+  .exti_pin.src_gpio_bank_no=EXTI_PortSourceGPIOH,
+  .exti_pin.src_gpio_pin_no=EXTI_PinSource14
+};
+
+rotary_encoder_info_t rotary_encoder_info_4 ={
+  .pin_a.gpio_bank_no=GPIOD,
+  .pin_a.gpio_pin_no=GPIO_Pin_5,
+  .pin_b.gpio_bank_no=GPIOD,
+  .pin_b.gpio_pin_no=GPIO_Pin_4,
+  .pin_s.gpio_bank_no=GPIOD,
+  .pin_s.gpio_pin_no=GPIO_Pin_3,
+  .exti_pin.src_gpio_bank_no=EXTI_PortSourceGPIOD,
+  .exti_pin.src_gpio_pin_no=EXTI_PinSource4
+};
+
 
 
 /*===========================================
 Implementation
 =============================================*/
+
+void EXTI2_IRQHandler(void){
+  dev_rotary_encoder_x_interrupt(&rotary_encoder_info_1);
+}
+
+void EXTI4_IRQHandler(void){
+  dev_rotary_encoder_x_interrupt(&rotary_encoder_info_4);
+}
+
+void EXTI9_5_IRQHandler(void){
+  dev_rotary_encoder_x_interrupt(&rotary_encoder_info_2);
+}
+
+void EXTI15_10_IRQHandler(void){
+  dev_rotary_encoder_x_interrupt(&rotary_encoder_info_3);
+}
+
 /*******************************************************************************
 * Function Name  : gpio_startup_init
 * Description    : Initialize all defined GPIOs

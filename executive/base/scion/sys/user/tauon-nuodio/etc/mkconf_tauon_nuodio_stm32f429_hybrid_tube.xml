@@ -36,7 +36,7 @@
       <process max="10" />
 
       <!-- max open file (MAX_OPEN_FILE)-->
-      <openfiles max="16" />
+      <openfiles max="32" />
 
       <!-- max descriptor per process (OPEN_MAX)-->
       <descriptors max="8" />
@@ -114,9 +114,17 @@
       <dev name="dev_oled_ssd1322_map"          use="on"/>
       <!-- /dev/tty0 -->
       <dev name="dev_tty_map"                   use="on"/>
-	   <!-- /dev/itm0 -->
+      <!-- /dev/rotry1 -->
+      <dev name="dev_rotary_encoder_1_map"      use="on"/>
+      <!-- /dev/rotry2 -->
+      <dev name="dev_rotary_encoder_2_map"      use="on"/>
+      <!-- /dev/rotry3 -->
+      <dev name="dev_rotary_encoder_3_map"      use="on"/>
+      <!-- /dev/rotry4 -->
+      <dev name="dev_rotary_encoder_4_map"      use="on"/>
+	    <!-- /dev/itm0 -->
       <dev name="dev_cmsis_itm0_map"            use="on"/>
-	   <!-- /dev/debug -->
+	    <!-- /dev/debug -->
       <dev name="dev_os_debug_map"              use="on"/>
    </devices>
 </target>

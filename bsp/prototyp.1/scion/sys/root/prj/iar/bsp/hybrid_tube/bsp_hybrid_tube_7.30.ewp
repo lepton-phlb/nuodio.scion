@@ -1050,7 +1050,7 @@
         </option>
         <option>
           <name>OGLastSavedByProductVersion</name>
-          <state></state>
+          <state>7.30.1.7765</state>
         </option>
         <option>
           <name>GeneralEnableMisra</name>
@@ -1096,12 +1096,12 @@
         </option>
         <option>
           <name>RTConfigPath2</name>
-          <state></state>
+          <state>$TOOLKIT_DIR$\INC\c\DLib_Config_Normal.h</state>
         </option>
         <option>
           <name>GFPUCoreSlave</name>
           <version>21</version>
-          <state>1</state>
+          <state>0</state>
         </option>
         <option>
           <name>GBECoreSlave</name>
@@ -1244,7 +1244,7 @@
         </option>
         <option>
           <name>OutputFile</name>
-          <state></state>
+          <state>$FILE_BNAME$.o</state>
         </option>
         <option>
           <name>CCLibConfigHeader</name>
@@ -1289,7 +1289,7 @@
         </option>
         <option>
           <name>CCOptLevelSlave</name>
-          <state>1</state>
+          <state>3</state>
         </option>
         <option>
           <name>CompilerMisraRules98</name>
@@ -1610,7 +1610,7 @@
         </option>
         <option>
           <name>IlinkOutputFile</name>
-          <state>###Unitialized###</state>
+          <state>bsp_hybrid_tube_7.30.out</state>
         </option>
         <option>
           <name>IlinkDebugInfoEnable</name>
@@ -1915,6 +1915,15 @@
         <group>
           <name>hybrid_tube</name>
           <group>
+            <name>cubemx_hal</name>
+            <file>
+              <name>$PROJ_DIR$\..\..\..\..\src\kernel\dev\bsp\hybrid_tube\cubemx_hal\gpio.c</name>
+            </file>
+            <file>
+              <name>$PROJ_DIR$\..\..\..\..\src\kernel\dev\bsp\hybrid_tube\cubemx_hal\spi.c</name>
+            </file>
+          </group>
+          <group>
             <name>dev_hybrid_tube_board</name>
             <file>
               <name>$PROJ_DIR$\..\..\..\..\src\kernel\dev\bsp\hybrid_tube\dev_hybrid_tube_board\dev_hybrid_tube_board.c</name>
@@ -1940,14 +1949,26 @@
             <file>
               <name>$PROJ_DIR$\..\..\..\..\src\kernel\dev\bsp\hybrid_tube\dev_hybrid_tube_peripherals\dev_hybrid_tube_uart_3.c</name>
             </file>
-          </group>
-          <group>
-            <name>cubemx_hal</name>
             <file>
-              <name>$PROJ_DIR$\..\..\..\..\src\kernel\dev\bsp\hybrid_tube\cubemx_hal\gpio.c</name>
+              <name>$PROJ_DIR$\..\..\..\..\src\kernel\dev\bsp\hybrid_tube\dev_hybrid_tube_peripherals\dev_rotary_encoder_1.c</name>
             </file>
             <file>
-              <name>$PROJ_DIR$\..\..\..\..\src\kernel\dev\bsp\hybrid_tube\cubemx_hal\spi.c</name>
+              <name>$PROJ_DIR$\..\..\..\..\src\kernel\dev\bsp\hybrid_tube\dev_hybrid_tube_peripherals\dev_rotary_encoder_2.c</name>
+            </file>
+            <file>
+              <name>$PROJ_DIR$\..\..\..\..\src\kernel\dev\bsp\hybrid_tube\dev_hybrid_tube_peripherals\dev_rotary_encoder_3.c</name>
+            </file>
+            <file>
+              <name>$PROJ_DIR$\..\..\..\..\src\kernel\dev\bsp\hybrid_tube\dev_hybrid_tube_peripherals\dev_rotary_encoder_4.c</name>
+            </file>
+            <file>
+              <name>$PROJ_DIR$\..\..\..\..\src\kernel\dev\bsp\hybrid_tube\dev_hybrid_tube_peripherals\dev_rotary_encoder_x.c</name>
+            </file>
+            <file>
+              <name>$PROJ_DIR$\..\..\..\..\src\kernel\dev\bsp\hybrid_tube\dev_hybrid_tube_peripherals\dev_rotary_encoder_x.h</name>
+            </file>
+            <file>
+              <name>$PROJ_DIR$\..\..\..\..\src\kernel\dev\bsp\hybrid_tube\dev_hybrid_tube_peripherals\ioctl_rotary_encoder.h</name>
             </file>
           </group>
         </group>
