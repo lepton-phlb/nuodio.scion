@@ -3029,7 +3029,7 @@
                       <group>
                         <name>startup</name>
                         <file>
-                          <name>$PROJ_DIR$\..\..\..\..\..\..\..\root\src\kernel\core\ucore\cmsis\Device\st\stm32f4xx\startup\iar\startup_stm32f4xx.s</name>
+                          <name>$PROJ_DIR$\..\..\..\..\..\..\..\root\src\kernel\core\ucore\cmsis\Device\st\stm32f4xx\startup\iar\startup_stm32f429xx.s</name>
                         </file>
                       </group>
                       <file>
