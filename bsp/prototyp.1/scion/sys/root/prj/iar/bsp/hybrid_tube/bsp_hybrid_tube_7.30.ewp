@@ -339,7 +339,7 @@
         </option>
         <option>
           <name>CCOptLevel</name>
-          <state>1</state>
+          <state>0</state>
         </option>
         <option>
           <name>CCOptStrategy</name>
@@ -348,7 +348,7 @@
         </option>
         <option>
           <name>CCOptLevelSlave</name>
-          <state>1</state>
+          <state>0</state>
         </option>
         <option>
           <name>CompilerMisraRules98</name>
@@ -1935,7 +1935,22 @@
           <group>
             <name>dev_hybrid_tube_peripherals</name>
             <file>
+              <name>$PROJ_DIR$\..\..\..\..\src\kernel\dev\bsp\hybrid_tube\dev_hybrid_tube_peripherals\dev_ad5262.c</name>
+            </file>
+            <file>
+              <name>$PROJ_DIR$\..\..\..\..\src\kernel\dev\bsp\hybrid_tube\dev_hybrid_tube_peripherals\dev_ad5262.h</name>
+            </file>
+            <file>
+              <name>$PROJ_DIR$\..\..\..\..\src\kernel\dev\bsp\hybrid_tube\dev_hybrid_tube_peripherals\dev_hybrid_tube_gpio.c</name>
+            </file>
+            <file>
+              <name>$PROJ_DIR$\..\..\..\..\src\kernel\dev\bsp\hybrid_tube\dev_hybrid_tube_peripherals\dev_hybrid_tube_gpio.h</name>
+            </file>
+            <file>
               <name>$PROJ_DIR$\..\..\..\..\src\kernel\dev\bsp\hybrid_tube\dev_hybrid_tube_peripherals\dev_hybrid_tube_oled_io.c</name>
+            </file>
+            <file>
+              <name>$PROJ_DIR$\..\..\..\..\src\kernel\dev\bsp\hybrid_tube\dev_hybrid_tube_peripherals\dev_hybrid_tube_spi_1.c</name>
             </file>
             <file>
               <name>$PROJ_DIR$\..\..\..\..\src\kernel\dev\bsp\hybrid_tube\dev_hybrid_tube_peripherals\dev_hybrid_tube_spi_5.c</name>
