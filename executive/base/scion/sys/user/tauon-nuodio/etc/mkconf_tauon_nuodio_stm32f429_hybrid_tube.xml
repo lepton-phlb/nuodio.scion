@@ -36,10 +36,10 @@
       <process max="10" />
 
       <!-- max open file (MAX_OPEN_FILE)-->
-      <openfiles max="32" />
+      <openfiles max="64" />
 
       <!-- max descriptor per process (OPEN_MAX)-->
-      <descriptors max="8" />
+      <descriptors max="24" />
 
       <!-- cpu built-in file-system (see fileflash device) -->
       <!-- <cpufs size="16000" /> -->
@@ -66,7 +66,9 @@
    <dev name="dev_proc_map"     use="on"/>
    <!-- /dev/hd/hda -->
    <dev name="dev_cpufs_map"    use="on"/>
-    <!-- /dev/pipe -->
+   <!-- /dev/head -->
+   <dev name="dev_head_map"     use="on"/>
+   <!-- /dev/pipe -->
    <dev name="dev_pipe_map"     use="on"/>
    <!-- /dev/ppp -->
    <dev name="dev_ppp_uip_map"  use="off"/>
@@ -102,18 +104,24 @@
       <dev name="dev_stm32f4xx_cpu_x_map"        use="on"/>
 	    <!-- /dev/board -->
       <dev name="dev_hybrid_tube_board_map"      use="on"/>
+      <!-- /dev/gpio -->
+      <dev name="dev_hybrid_tube_gpio_map"      use="on"/>
       <!-- /dev/ttys3 -->
       <dev name="dev_hybrid_tube_uart_s3_map"   use="on"/>
+      <!-- /dev/spi1 -->
+      <dev name="dev_hybrid_tube_spi_1_map"     use="on"/>
       <!-- /dev/spi5 -->
       <dev name="dev_hybrid_tube_spi_5_map"     use="on"/>
       <!-- /dev/spics -->
       <dev name="dev_hybrid_tube_spi_cs_map"    use="on"/>
       <!-- /dev/oledio -->
-      <dev name="dev_hybrid_tube_oled_io_map"    use="on"/>
+      <dev name="dev_hybrid_tube_oled_io_map"   use="on"/>
       <!-- /dev/lcd0 -->
       <dev name="dev_oled_ssd1322_map"          use="on"/>
       <!-- /dev/tty0 -->
       <dev name="dev_tty_map"                   use="on"/>
+       <!-- /dev/ad5262 -->
+      <dev name="dev_ad5262_map"                use="on"/>
       <!-- /dev/rotry1 -->
       <dev name="dev_rotary_encoder_1_map"      use="on"/>
       <!-- /dev/rotry2 -->
