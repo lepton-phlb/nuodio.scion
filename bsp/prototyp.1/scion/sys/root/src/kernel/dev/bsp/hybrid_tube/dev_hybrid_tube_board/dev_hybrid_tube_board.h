@@ -51,6 +51,10 @@ typedef enum
   GPIO_ID_TXD6,
   GPIO_ID_RXD6,
 
+  GPIO_ID_FX_MOSI,
+  GPIO_ID_FX_MISO,
+  GPIO_ID_FX_SCLK,
+  
   GPIO_ID_OLED_MOSI,
   GPIO_ID_OLED_SCLK,
   GPIO_ID_OLED_DC,
@@ -70,7 +74,12 @@ typedef enum
 #define GPIO_TXD6     (&Gpio_Descriptor[GPIO_ID_TXD6])
 #define GPIO_RXD6     (&Gpio_Descriptor[GPIO_ID_RXD6])
 
-//#define GPIO_MISO     (&Gpio_Descriptor[GPIO_ID_MISO])
+
+#define GPIO_FX_MOSI     (&Gpio_Descriptor[GPIO_ID_FX_MOSI])
+#define GPIO_FX_MISO     (&Gpio_Descriptor[GPIO_ID_FX_MISO])
+#define GPIO_FX_SCLK     (&Gpio_Descriptor[GPIO_ID_FX_SCLK])
+
+
 #define GPIO_OLED_MOSI     (&Gpio_Descriptor[GPIO_ID_OLED_MOSI])
 #define GPIO_OLED_SCLK     (&Gpio_Descriptor[GPIO_ID_OLED_SCLK])
 #define GPIO_OLED_DC       (&Gpio_Descriptor[GPIO_ID_OLED_DC])
@@ -82,6 +91,10 @@ typedef enum
 #define GPIO_LED_R  (&Gpio_Descriptor[GPIO_ID_LED_R])
 #define GPIO_LED_V  (&Gpio_Descriptor[GPIO_ID_LED_V])
 #define GPIO_LED_B  (&Gpio_Descriptor[GPIO_ID_LED_B])
+
+
+#define GPIO_BYPASS_COMMAND_BANK_NO
+#define GPIO_BYPASS_COMMAND_BANK_NO
 
 
 /*******************************************************************************
@@ -105,6 +118,7 @@ typedef enum
 *******************************************************************************/
 typedef enum
 {
+  SPI_ID_FX,
   SPI_ID_OLED,
   SPI_NB
 } _SPI_LIST;

@@ -93,6 +93,10 @@ const _Gpio_Descriptor Gpio_Descriptor[] = {
   {GPIO_TYPE_STD, GPIOC,  GPIO_Pin_6,   0,  GPIO_MODE_IN,       0},   // GPIO_TXD6
   {GPIO_TYPE_STD, GPIOC,  GPIO_Pin_7,   0,  GPIO_MODE_IN,       0},   // GPIO_RXD6
   
+  {GPIO_TYPE_STD, GPIOA,  GPIO_Pin_7,   0,  GPIO_MODE_IN,       0},   // GPIO_ID_FX_MOSI
+  {GPIO_TYPE_STD, GPIOA,  GPIO_Pin_6,   0,  GPIO_MODE_IN,       0},   // GPIO_ID_FX_MISO
+  {GPIO_TYPE_STD, GPIOA,  GPIO_Pin_5,   0,  GPIO_MODE_IN,       0},   // GPIO_ID_FX_SCLK
+  
   {GPIO_TYPE_STD, GPIOF,  GPIO_Pin_9,   0,  GPIO_MODE_IN,       0},   // GPIO_ID_OLED_MOSI
   {GPIO_TYPE_STD, GPIOF,  GPIO_Pin_7,   0,  GPIO_MODE_IN,       0},   // GPIO_ID_OLED_SCLK
   {GPIO_TYPE_STD, GPIOF,  GPIO_Pin_6,   1,  GPIO_MODE_OUT,      1},   // GPIO_ID_OLED_DC
@@ -122,10 +126,19 @@ board_stm32f4xx_uart_info_t stm32f4xx_uart_6=
 };
 
 // spi 5
+board_stm32f4xx_spi_info_t hybrid_tube_spi_1=
+{
+   .spi_descriptor={SPI1,  RCC_APB2PeriphClockCmd, RCC_APB2ENR_SPI1EN,  GPIO_FX_MISO,  GPIO_FX_MOSI,  GPIO_FX_SCLK, GPIO_AF5_SPI1, 0, 20000000} // SPI1 Digital potentiometer
+};
+
+
+// spi 5
 board_stm32f4xx_spi_info_t hybrid_tube_spi_5=
 {
-   .spi_descriptor={SPI5,  RCC_APB2PeriphClockCmd, RCC_APB2ENR_SPI5EN,  (void*)0,  GPIO_OLED_MOSI,  GPIO_OLED_SCLK, GPIO_AF5_SPI5, 0, 20000000} // SPI_FLASH   // SPI1
+   .spi_descriptor={SPI5,  RCC_APB2PeriphClockCmd, RCC_APB2ENR_SPI5EN,  (void*)0,  GPIO_OLED_MOSI,  GPIO_OLED_SCLK, GPIO_AF5_SPI5, 0, 20000000} // SPI5 SSD1322 LCD OLED 
 };
+
+
 
 
 rotary_encoder_info_t rotary_encoder_info_1 ={
@@ -226,17 +239,10 @@ static void gpio_startup_init(void)
 | See:
 ---------------------------------------------*/
 int dev_hybrid_tube_board_load(void){
+   //
    gpio_startup_init();
    dma_startup_init();
-   //set on RVB led
-   gpio_reset(GPIO_LED_R);
-   gpio_reset(GPIO_LED_V);
-   gpio_reset(GPIO_LED_B);
    //
-   gpio_set(GPIO_LED_R);
-   gpio_set(GPIO_LED_V);
-   gpio_set(GPIO_LED_B);
-   
    return 0;
 }
 
