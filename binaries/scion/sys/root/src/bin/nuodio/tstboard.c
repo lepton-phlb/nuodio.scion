@@ -56,8 +56,8 @@ static  unsigned char buf[256*64/2];
 /*===========================================
 Implementation
 =============================================*/
-
-
+#define DEFAULT_GAIN_IN    255 
+#define DEFAULT_GAIN_OUT   255
 /*-------------------------------------------
 | Name:tstboard_main
 | Description:
@@ -72,6 +72,17 @@ int tstboard_main(int argc,char* argv[]){
    int fd_rotary3;
    int fd_rotary4;
    
+   
+   int fd_g_inr;
+   int fd_g_inl;
+   int fd_g_outr;
+   int fd_g_outl;
+   
+   int fd_g_sat;
+   int fd_r_tone;
+   int fd_r_lvl;
+   
+   
    uchar8_t rotary_switch1=0;
    uchar8_t rotary_switch2=0;
    uchar8_t rotary_switch3=0;
@@ -80,6 +91,8 @@ int tstboard_main(int argc,char* argv[]){
    int timeout=1000;
    struct timeval time_out;
    fd_set readfs;
+   
+   uchar8_t u8_resistor;
    
    
    //
@@ -104,6 +117,7 @@ int tstboard_main(int argc,char* argv[]){
    write(fd_tty,"E",1);
 #endif
    
+   //rotary encoder
    if((fd_rotary1=open("/dev/rotry1",O_RDONLY|O_NONBLOCK,0))<0)
       return -1;
    printf("rotary1 open\r\n");
@@ -119,6 +133,46 @@ int tstboard_main(int argc,char* argv[]){
    if((fd_rotary4=open("/dev/rotry4",O_RDONLY|O_NONBLOCK,0))<0)
       return -1;
    printf("rotary4 open\r\n");
+   
+   //gain in
+   if((fd_g_inr=open("/dev/g_inr",O_WRONLY,0))<0)
+      return -1;
+   printf("g in r open\r\n");
+   
+   if((fd_g_inl=open("/dev/g_inl",O_WRONLY,0))<0)
+      return -1;
+   printf("g in l open\r\n");
+   
+   //gain out
+   if((fd_g_outr=open("/dev/g_outr",O_WRONLY,0))<0)
+      return -1;
+   printf("g out r open\r\n");
+   
+   if((fd_g_outl=open("/dev/g_outl",O_WRONLY,0))<0)
+      return -1;
+   printf("g out l open\r\n");
+   
+   //gain saturation
+   if((fd_g_sat=open("/dev/g_sat",O_WRONLY,0))<0)
+      return -1;
+   printf("g sat open\r\n");
+   
+    //r tone
+   if((fd_r_tone=open("/dev/r_tone",O_WRONLY,0))<0)
+      return -1;
+   printf("r tone open\r\n");
+   
+   //
+   //init gain on line in (Right/Left) and line out (Right/Left)
+   //line in
+   u8_resistor = DEFAULT_GAIN_IN;
+   write(fd_g_inr,&u8_resistor,1);
+   write(fd_g_inl,&u8_resistor,1);
+   //line out
+   u8_resistor = DEFAULT_GAIN_OUT;
+   write(fd_g_outr,&u8_resistor,1);
+   write(fd_g_outl,&u8_resistor,1);
+   
    //
    FD_ZERO(&readfs);
    //
@@ -148,36 +202,50 @@ int tstboard_main(int argc,char* argv[]){
          
          default:
             //
-            if(FD_ISSET(fd_rotary1,&readfs)) {   //stdin
+            if(FD_ISSET(fd_rotary1,&readfs)) {   //rotary 1
                int cb; 
                int32_t counter=0;
       
                if((cb=read(fd_rotary1,&counter,sizeof(counter)))==sizeof(counter)){
                   printf("rotary1 =%d\r\n",counter);
+                  //
+                  u8_resistor = counter;
+                  write(fd_g_inr,&u8_resistor,1);
+                  write(fd_g_inl,&u8_resistor,1);
                }
             }
-            if(FD_ISSET(fd_rotary2,&readfs)) {   //stdin
+            if(FD_ISSET(fd_rotary2,&readfs)) {   //rotary 2
                int cb; 
                int32_t counter=0;
       
                if((cb=read(fd_rotary2,&counter,sizeof(counter)))==sizeof(counter)){
                   printf("rotary2 =%d\r\n",counter);
+                  //
+                  u8_resistor = counter;
+                  write(fd_g_outr,&u8_resistor,1);
+                  write(fd_g_outl,&u8_resistor,1);
                }
             }
-            if(FD_ISSET(fd_rotary3,&readfs)) {   //stdin
+            if(FD_ISSET(fd_rotary3,&readfs)) {   //rotary 3
                int cb; 
                int32_t counter=0;
       
                if((cb=read(fd_rotary3,&counter,sizeof(counter)))==sizeof(counter)){
                   printf("rotary3 =%d\r\n",counter);
+                  //
+                  u8_resistor = counter;
+                  write(fd_g_sat,&u8_resistor,1);
                }
             }
-            if(FD_ISSET(fd_rotary4,&readfs)) {   //stdin
+            if(FD_ISSET(fd_rotary4,&readfs)) {   //rotary 4
                int cb; 
                int32_t counter=0;
       
                if((cb=read(fd_rotary4,&counter,sizeof(counter)))==sizeof(counter)){
                   printf("rotary4 =%d\r\n",counter);
+                  //
+                  u8_resistor = counter;
+                  write(fd_r_tone,&u8_resistor,1);
                }
             }
          break;
