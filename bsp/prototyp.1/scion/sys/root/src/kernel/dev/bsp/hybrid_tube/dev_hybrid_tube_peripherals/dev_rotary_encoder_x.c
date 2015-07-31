@@ -320,7 +320,7 @@ int dev_rotary_encoder_x_open(desc_t desc, int o_flag, rotary_encoder_info_t* ro
          //
          rotary_encoder_info->input_r=0;
          rotary_encoder_info->input_w=0;
-         rotary_encoder_info->counter = 255;
+         rotary_encoder_info->counter = 0x80;
          //
          //Encoder_Configration();
          //encoder_configuration(rotary_encoder_info);
