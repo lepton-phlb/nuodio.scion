@@ -48,6 +48,8 @@ Includes
 #include "kernel/dev/arch/cortexm/stm32f4xx/driverlib/stm32f4xx_hal_gpio_ex.h"
 
 #include "kernel/dev/bsp/hybrid_tube/dev_hybrid_tube_peripherals/dev_hybrid_tube_gpio.h"
+#include "kernel/dev/bsp/hybrid_tube/dev_hybrid_tube_peripherals/ioctl_hybrid_tube_gpio.h"
+
 
 #include <ctype.h>
 
@@ -558,6 +560,29 @@ int dev_hybrid_tube_gpio_seek(desc_t desc,int offset,int origin){
 int dev_hybrid_tube_gpio_ioctl(desc_t desc,int request,va_list ap){
 
    switch(request) {
+      case IN2FX2OUT:
+         //Right input from line IN to FX
+         GPIO_WriteBit(gpio_switch_source_right_input_effect_c1.gpio_bank_no,gpio_switch_source_right_input_effect_c1.gpio_pin_no,INPUT_EFFECT_SRC_FROM_LINEIN_RIGHT);
+         //Left input from line IN to FX
+         GPIO_WriteBit(gpio_switch_source_left_input_effect_c2.gpio_bank_no,gpio_switch_source_left_input_effect_c2.gpio_pin_no,INPUT_EFFECT_SRC_FROM_LINEIN_LEFT);
+         //Right line out from FX
+         GPIO_WriteBit(gpio_switch_source_right_line_ouptut_d1.gpio_bank_no,gpio_switch_source_right_line_ouptut_d1.gpio_pin_no,LINE_OUTPUT_SRC_FROM_EFFECTOUT_RIGHT);
+         //Left line out fom FX
+         GPIO_WriteBit(gpio_switch_source_left_line_ouptut_d2.gpio_bank_no,gpio_switch_source_left_line_ouptut_d2.gpio_pin_no,LINE_OUTPUT_SRC_FROM_EFFECTOUT_LEFT);
+   
+      break;
+      
+      case IN2ADC_DAC2OUT:
+         //ADC input from line in Right
+         GPIO_WriteBit(gpio_switch_source_input_adc_a1.gpio_bank_no,gpio_switch_source_input_adc_a1.gpio_pin_no,INPUT_ADC_SRC_FROM_LINEIN_RIGHT);
+         //ADC input from line in left
+         GPIO_WriteBit(gpio_switch_source_input_adc_a2.gpio_bank_no,gpio_switch_source_input_adc_a2.gpio_pin_no,INPUT_ADC_SRC_FROM_LINEIN_LEFT);
+         
+         //Right output from DAC
+         GPIO_WriteBit(gpio_switch_source_right_line_ouptut_d1.gpio_bank_no,gpio_switch_source_right_line_ouptut_d1.gpio_pin_no,LINE_OUTPUT_SRC_FROM_DACOUT_RIGHT);
+         //Left output from DAC
+         GPIO_WriteBit(gpio_switch_source_left_line_ouptut_d2.gpio_bank_no,gpio_switch_source_left_line_ouptut_d2.gpio_pin_no,LINE_OUTPUT_SRC_FROM_DACOUT_LEFT);
+      break;
 
    //
    default:

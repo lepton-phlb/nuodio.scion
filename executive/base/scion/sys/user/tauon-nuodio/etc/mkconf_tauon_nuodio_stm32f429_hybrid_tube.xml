@@ -110,6 +110,8 @@
       <dev name="dev_hybrid_tube_uart_s3_map"   use="on"/>
       <!-- /dev/spi1 -->
       <dev name="dev_hybrid_tube_spi_1_map"     use="on"/>
+      <!-- /dev/spi4 -->
+      <dev name="dev_hybrid_tube_spi_4_map"     use="on"/>
       <!-- /dev/spi5 -->
       <dev name="dev_hybrid_tube_spi_5_map"     use="on"/>
       <!-- /dev/spics -->
@@ -120,8 +122,12 @@
       <dev name="dev_oled_ssd1322_map"          use="on"/>
       <!-- /dev/tty0 -->
       <dev name="dev_tty_map"                   use="on"/>
-       <!-- /dev/ad5262 -->
+      <!-- /dev/ad5262 -->
       <dev name="dev_ad5262_map"                use="on"/>
+      <!-- /dev/pcm3060 -->
+      <dev name="dev_pcm3060_map"               use="on"/>
+      <!-- /dev/i2s3 -->
+      <dev name="dev_stm32f4xx_i2s_3_map"       use="on"/>
       <!-- /dev/rotry1 -->
       <dev name="dev_rotary_encoder_1_map"      use="on"/>
       <!-- /dev/rotry2 -->

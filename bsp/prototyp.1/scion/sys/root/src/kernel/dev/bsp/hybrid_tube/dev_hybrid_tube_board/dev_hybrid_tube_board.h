@@ -55,6 +55,10 @@ typedef enum
   GPIO_ID_FX_MISO,
   GPIO_ID_FX_SCLK,
   
+  GPIO_ID_CODEC_MOSI,
+  GPIO_ID_CODEC_MISO,
+  GPIO_ID_CODEC_SCLK,
+  
   GPIO_ID_OLED_MOSI,
   GPIO_ID_OLED_SCLK,
   GPIO_ID_OLED_DC,
@@ -79,6 +83,9 @@ typedef enum
 #define GPIO_FX_MISO     (&Gpio_Descriptor[GPIO_ID_FX_MISO])
 #define GPIO_FX_SCLK     (&Gpio_Descriptor[GPIO_ID_FX_SCLK])
 
+#define GPIO_CODEC_MOSI     (&Gpio_Descriptor[GPIO_ID_CODEC_MOSI])
+#define GPIO_CODEC_MISO     (&Gpio_Descriptor[GPIO_ID_CODEC_MISO])
+#define GPIO_CODEC_SCLK     (&Gpio_Descriptor[GPIO_ID_CODEC_SCLK])
 
 #define GPIO_OLED_MOSI     (&Gpio_Descriptor[GPIO_ID_OLED_MOSI])
 #define GPIO_OLED_SCLK     (&Gpio_Descriptor[GPIO_ID_OLED_SCLK])

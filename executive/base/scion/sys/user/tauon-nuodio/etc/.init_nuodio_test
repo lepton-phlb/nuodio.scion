@@ -6,8 +6,10 @@ mount /dev/tty0 /dev/lcd0.0 /dev/tty0.0
 
 #spi1.0
 mount /dev/head /dev/spi1 /dev/spi1.0
+#spi4.0
+mount /dev/head /dev/spi4 /dev/spi4.0
 
-# a0 cs shdn pr
+#potentiometer ad5262 a0 cs shdn pr
 mount /dev/ad5262 /dev/spi1.0 /dev/g_inr 0 i.10 c.15 i.9
 mount /dev/ad5262 /dev/spi1.0 /dev/g_inl 1 i.10 c.15 i.9
 
@@ -18,6 +20,8 @@ mount /dev/ad5262 /dev/spi1.0 /dev/g_sat 0 h.4 i.6 i.7
 mount /dev/ad5262 /dev/spi1.0 /dev/r_tone 0 h.5 i.4 i.5
 mount /dev/ad5262 /dev/spi1.0 /dev/r_lvl 1 h.4 i.6 i.7
 
+#adc/dac pcm3060 cs rst
+mount /dev/pcm3060 /dev/spi4.0 /dev/codec e.3 e.4
 
 date > /dev/tty0.0
 echo nuodio > /dev/tty0.0

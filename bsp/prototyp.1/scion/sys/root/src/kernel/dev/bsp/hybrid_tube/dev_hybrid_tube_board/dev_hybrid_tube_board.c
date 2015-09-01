@@ -97,6 +97,10 @@ const _Gpio_Descriptor Gpio_Descriptor[] = {
   {GPIO_TYPE_STD, GPIOA,  GPIO_Pin_6,   0,  GPIO_MODE_IN,       0},   // GPIO_ID_FX_MISO
   {GPIO_TYPE_STD, GPIOA,  GPIO_Pin_5,   0,  GPIO_MODE_IN,       0},   // GPIO_ID_FX_SCLK
   
+  {GPIO_TYPE_STD, GPIOE,  GPIO_Pin_6,   0,  GPIO_MODE_IN,       0},   // GPIO_ID_CODEC_MOSI
+  {GPIO_TYPE_STD, GPIOE,  GPIO_Pin_5,   0,  GPIO_MODE_IN,       0},   // GPIO_ID_CODEC_MISO
+  {GPIO_TYPE_STD, GPIOE,  GPIO_Pin_2,   0,  GPIO_MODE_IN,       0},   // GPIO_ID_CODEC_SCLK
+  
   {GPIO_TYPE_STD, GPIOF,  GPIO_Pin_9,   0,  GPIO_MODE_IN,       0},   // GPIO_ID_OLED_MOSI
   {GPIO_TYPE_STD, GPIOF,  GPIO_Pin_7,   0,  GPIO_MODE_IN,       0},   // GPIO_ID_OLED_SCLK
   {GPIO_TYPE_STD, GPIOF,  GPIO_Pin_6,   1,  GPIO_MODE_OUT,      1},   // GPIO_ID_OLED_DC
@@ -125,10 +129,17 @@ board_stm32f4xx_uart_info_t stm32f4xx_uart_6=
    .uart_descriptor={USART6, RCC_APB2PeriphClockCmd, RCC_APB2Periph_USART6, USART6_IRQn, DMA2_Stream1, DMA_Channel_5, DMA2_Stream1_IRQn, GPIO_TXD6, GPIO_RXD6, GPIO_AF_USART6, &Uart_Ctrl[UART_ID_6]}   // UART_3
 };
 
-// spi 5
+
+// spi 1
 board_stm32f4xx_spi_info_t hybrid_tube_spi_1=
 {
    .spi_descriptor={SPI1,  RCC_APB2PeriphClockCmd, RCC_APB2ENR_SPI1EN,  GPIO_FX_MISO,  GPIO_FX_MOSI,  GPIO_FX_SCLK, GPIO_AF5_SPI1, 0, 20000000} // SPI1 Digital potentiometer
+};
+
+// spi 4
+board_stm32f4xx_spi_info_t hybrid_tube_spi_4=
+{
+   .spi_descriptor={SPI4,  RCC_APB2PeriphClockCmd, RCC_APB2ENR_SPI4EN,  GPIO_CODEC_MISO,  GPIO_CODEC_MOSI,  GPIO_CODEC_SCLK, GPIO_AF5_SPI4, 0, 1000000} // SPI4 CODEC 1MHz  
 };
 
 

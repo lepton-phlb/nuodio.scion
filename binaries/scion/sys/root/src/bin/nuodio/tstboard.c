@@ -47,6 +47,7 @@ Includes
 #include "lib/libc/stdio/stdio.h"
 
 #include "kernel/dev/bsp/hybrid_tube/dev_hybrid_tube_peripherals/ioctl_rotary_encoder.h"
+#include "kernel/dev/bsp/hybrid_tube/dev_hybrid_tube_peripherals/ioctl_hybrid_tube_gpio.h"
 
 /*===========================================
 Global Declaration
@@ -81,6 +82,9 @@ int tstboard_main(int argc,char* argv[]){
    int fd_g_sat;
    int fd_r_tone;
    int fd_r_lvl;
+   
+   int fd_gpio;
+   int fd_i2s3;
    
    
    uchar8_t rotary_switch1=0;
@@ -172,6 +176,19 @@ int tstboard_main(int argc,char* argv[]){
    u8_resistor = DEFAULT_GAIN_OUT;
    write(fd_g_outr,&u8_resistor,1);
    write(fd_g_outl,&u8_resistor,1);
+   
+   //gpio audio routing
+   if((fd_gpio=open("/dev/gpio",O_RDWR,0))<0)
+      return -1;
+   printf("gpio open\r\n");
+   //
+   ioctl(fd_gpio,IN2ADC_DAC2OUT);
+   
+   //i2s3
+   if((fd_i2s3=open("/dev/i2s3",O_RDWR,0))<0)
+      return -1;
+   printf("i2s3 open\r\n");
+   
    
    //
    FD_ZERO(&readfs);

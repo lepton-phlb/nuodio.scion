@@ -1953,6 +1953,9 @@
               <name>$PROJ_DIR$\..\..\..\..\src\kernel\dev\bsp\hybrid_tube\dev_hybrid_tube_peripherals\dev_hybrid_tube_spi_1.c</name>
             </file>
             <file>
+              <name>$PROJ_DIR$\..\..\..\..\src\kernel\dev\bsp\hybrid_tube\dev_hybrid_tube_peripherals\dev_hybrid_tube_spi_4.c</name>
+            </file>
+            <file>
               <name>$PROJ_DIR$\..\..\..\..\src\kernel\dev\bsp\hybrid_tube\dev_hybrid_tube_peripherals\dev_hybrid_tube_spi_5.c</name>
             </file>
             <file>
@@ -1963,6 +1966,9 @@
             </file>
             <file>
               <name>$PROJ_DIR$\..\..\..\..\src\kernel\dev\bsp\hybrid_tube\dev_hybrid_tube_peripherals\dev_hybrid_tube_uart_3.c</name>
+            </file>
+            <file>
+              <name>$PROJ_DIR$\..\..\..\..\src\kernel\dev\bsp\hybrid_tube\dev_hybrid_tube_peripherals\dev_pcm3060.c</name>
             </file>
             <file>
               <name>$PROJ_DIR$\..\..\..\..\src\kernel\dev\bsp\hybrid_tube\dev_hybrid_tube_peripherals\dev_rotary_encoder_1.c</name>
@@ -1981,6 +1987,12 @@
             </file>
             <file>
               <name>$PROJ_DIR$\..\..\..\..\src\kernel\dev\bsp\hybrid_tube\dev_hybrid_tube_peripherals\dev_rotary_encoder_x.h</name>
+            </file>
+            <file>
+              <name>$PROJ_DIR$\..\..\..\..\src\kernel\dev\bsp\hybrid_tube\dev_hybrid_tube_peripherals\dev_stm32f4xx_i2s_3.c</name>
+            </file>
+            <file>
+              <name>$PROJ_DIR$\..\..\..\..\src\kernel\dev\bsp\hybrid_tube\dev_hybrid_tube_peripherals\ioctl_hybrid_tube_gpio.h</name>
             </file>
             <file>
               <name>$PROJ_DIR$\..\..\..\..\src\kernel\dev\bsp\hybrid_tube\dev_hybrid_tube_peripherals\ioctl_rotary_encoder.h</name>

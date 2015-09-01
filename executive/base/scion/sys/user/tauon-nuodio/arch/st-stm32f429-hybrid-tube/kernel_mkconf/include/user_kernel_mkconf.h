@@ -25,7 +25,11 @@ Compiler Directive
 //use pipe
 #define __tauon_kernel_profile__ __tauon_kernel_profile_classic__
 #define __KERNEL_PIPE_SIZE 1024
+
+//rootfs 
+#define __KERNEL_RTFS_NODETBL_SIZE 60
 #define __KERNEL_RTFS_BLOCK_SIZE 16
+#define __KERNEL_RTFS_MAX_FILENAME 8
 
 //force EFFS for stm32f407 on olimex-stm32-p407 board
 #define __file_system_profile__  __file_system_profile_classic__
