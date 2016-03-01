@@ -128,6 +128,8 @@
       <dev name="dev_pcm3060_map"               use="on"/>
       <!-- /dev/i2s3 -->
       <dev name="dev_stm32f4xx_i2s_3_map"       use="on"/>
+       <!-- /dev/usbaudio -->
+      <dev name="dev_usb_audio_core_map"      use="on"/>
       <!-- /dev/rotry1 -->
       <dev name="dev_rotary_encoder_1_map"      use="on"/>
       <!-- /dev/rotry2 -->
@@ -159,7 +161,7 @@
 
 <target name="cortexm_lepton">
         <boot dest_path="C:\tauon\sys\user\tauon-nuodio\etc">
-            <command arg="initd -i /dev/ttys3 -o /dev/ttys3" />
+            <command arg="initd -i /dev/console -o /dev/console" />
 				<!--command arg="initd -i /dev/debug -o /dev/debug" /-->
         </boot>
 </target>
@@ -195,7 +197,9 @@
 <!-- user binaries. -->
 <!-- /usr/bin -->
 <binaries src_path="bin" dest_path="bin">
-        <bin name="tstboard"        stack="2048"    priority="100"  timeslice="5" />
+        <bin name="tstboard"        stack="2048"    priority="50"  timeslice="1" />
+        <bin name="adda"            stack="2048"    priority="130"  timeslice="1" />
+        <bin name="tstusb"          stack="2048"    priority="130"  timeslice="1" />
         <!--bin name="udpsrvd"      stack="2048"    priority="10" timeslice="5" /-->
 </binaries>
 

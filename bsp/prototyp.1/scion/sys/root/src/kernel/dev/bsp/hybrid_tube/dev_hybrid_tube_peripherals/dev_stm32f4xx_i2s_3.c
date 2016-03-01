@@ -39,8 +39,10 @@ either the MPL or the [eCos GPL] License."
 #include "kernel/core/ioctl.h"
 #include "kernel/core/ioctl_spi.h"
 #include "kernel/core/fcntl.h"
+#include "kernel/core/stat.h"
 #include "kernel/core/cpu.h"
 #include "kernel/fs/vfs/vfsdev.h"
+#include "kernel/core/kernel_ring_buffer.h"
 
 #include "kernel/dev/bsp/hybrid_tube/cubemx_hal/gpio.h"
 
@@ -52,11 +54,14 @@ either the MPL or the [eCos GPL] License."
 
 #include "stm32f4xx_hal.h"
 
-#define SAMPLES_PER_BUFFER 32
+#define SAMPLES_PER_BUFFER 48//((48)*2) //32
 
-int32_t RxBuffer[SAMPLES_PER_BUFFER * 2]={0};//RX is receive of input audio from codec
-int32_t TxBuffer[SAMPLES_PER_BUFFER * 2]={0};//TX is transmit of output audio to codec
-
+#pragma data_alignment=4 
+static int32_t RxBuffer[SAMPLES_PER_BUFFER * 2]={0};//RX is receive of input audio from codec
+#pragma data_alignment=4 
+static int32_t TxBuffer[SAMPLES_PER_BUFFER * 2]={0};//TX is transmit of output audio to codec
+//#pragma data_alignment=4 
+//static int32_t WorkingBuffer[SAMPLES_PER_BUFFER * 2]={0};
 
 
 typedef struct stm32f4xx_i2s_3_info_st{
@@ -69,7 +74,7 @@ typedef struct stm32f4xx_i2s_3_info_st{
  
 }stm32f4xx_i2s_3_info_t;
 
-
+#pragma data_alignment=4 
 static stm32f4xx_i2s_3_info_t g_stm32f4xx_i2s_3_info;
 
 const char dev_stm32f4xx_i2s_3_name[]="i2s3\0";
@@ -99,60 +104,38 @@ dev_map_t dev_stm32f4xx_i2s_3_map={
    dev_stm32f4xx_i2s_3_ioctl //ioctl
 };
 
+//
+#define I2S_AUDIO_CHANNEL_MAX           2
 
-#if 0
-void
-HAL_I2S_TxCpltCallback(I2S_HandleTypeDef *hi2s)
-{
-  uint32_t newTx = 0;
-}
- 
-void HAL_I2S_RxHalfCpltCallback(I2S_HandleTypeDef *hi2s)
-{
-   uint32_t newTx = 0;
-  __HAL_I2S_CLEAR_OVRFLAG(hi2s);
-  __HAL_I2S_CLEAR_UDRFLAG(hi2s);
- 
-}
+#define I2S_AUDIO_CHANNEL_ADC_INPUT     0
+#define I2S_AUDIO_CHANNEL_ADC_INPUT_SZ  ((SAMPLES_PER_BUFFER*4)*sizeof(int32_t))
 
- 
-void HAL_I2S_RxCpltCallback(I2S_HandleTypeDef *hi2s)
-{
-   uint32_t newTx = 0;
-}
+#define I2S_AUDIO_CHANNEL_DAC_OUTPUT    1
+#define I2S_AUDIO_CHANNEL_DAC_OUTPUT_SZ ((SAMPLES_PER_BUFFER*4)*sizeof(int32_t))
 
-#endif
+#pragma data_alignment=4
+static uint8_t i2s_audio_channel_adc_input_buffer[I2S_AUDIO_CHANNEL_ADC_INPUT_SZ]={0};
+
+#pragma data_alignment=4
+static uint8_t i2s_audio_channel_dac_output_buffer[I2S_AUDIO_CHANNEL_DAC_OUTPUT_SZ]={0};
 
 
+static kernel_ring_buffer_t krb_i2s_audio_channel_adc_input;
+static kernel_ring_buffer_t krb_i2s_audio_channel_dac_output;
+
+
+//
 void I2S2_RX_ProcessBuffer(uint32_t posbegin, uint32_t posend){
-   int32_t audiosample;
-   float volume;
-   volume=0.5;
-
-   memcpy(&TxBuffer[posbegin],&RxBuffer[posbegin],(posend-posbegin)*sizeof(int32_t));
-#if 0
-   for(int i=posbegin;i<posend;i++){
-      /*audiosample=(RxBuffer[i*4+0] << 16) | RxBuffer[i*4+1];
-
-      audiosample=audiosample * volume;
-
-      TxBuffer[i*4+0]=(audiosample >> 16);
-      TxBuffer[i*4+1]=audiosample;
-
-
-      audiosample=(RxBuffer[i*4+2] << 16) | RxBuffer[i*4+3];
-
-      audiosample=audiosample * volume;
-
-      TxBuffer[i*4+2]=(audiosample >> 16);
-      TxBuffer[i*4+3]=audiosample;
-      */
-
-       
-      ((int32_t*)TxBuffer)[i*2+0]=((int32_t*)RxBuffer)[i*2+0];
-      ((int32_t*)TxBuffer)[i*2+1]=((int32_t*)RxBuffer)[i*2+1];
- }
-#endif
+   //
+   if(__kernel_ring_buffer_is_empty(krb_i2s_audio_channel_adc_input)){
+      __fire_io_int(ofile_lst[g_stm32f4xx_i2s_3_info.desc_r].owner_pthread_ptr_read);
+   }
+   //write data from adc to ring buffer
+   kernel_ring_buffer_write(&krb_i2s_audio_channel_adc_input,(uint8_t*)&RxBuffer[posbegin],(posend-posbegin)*sizeof(int32_t));
+                            
+   //read data from ring buffer to dac
+   kernel_ring_buffer_read(&krb_i2s_audio_channel_dac_output,(uint8_t*)&TxBuffer[posbegin],(posend-posbegin)*sizeof(int32_t));
+                            
 }
 
 void HAL_I2S_RxCpltCallback(I2S_HandleTypeDef *hi2s){
@@ -233,6 +216,202 @@ void SPI3_IRQHandler(void) {
 /*============================================
 | Implementation
 ==============================================*/
+
+/*-------------------------------------------
+| Name:WaitForWCLK 
+| Description:WS (stm32f4 I2S salve mode issue. Workaround).
+| Parameters:
+| Return Type:
+| Comments:
+| See:
+---------------------------------------------*/
+// WS waiting function:
+static uint8_t WaitForWCLK(uint8_t edge)
+{
+   uint32_t TOTmr1ms = 1;  // TOTmr1ms is decremented in SysTick interrupt
+   if(edge>0){ // wait for WCLK=1
+        while (0==(GPIOA->IDR & GPIO_PIN_15)){
+            if(TOTmr1ms==0)
+                return 0;
+        }
+        return 1;
+   }else{    // wait for WCLK=0
+        while (0!=(GPIOA->IDR & GPIO_PIN_15)){
+            if(TOTmr1ms==0)
+                return 0;
+        }
+        return 1;
+ 
+   }
+}
+
+/**
+  * @brief Full-Duplex Transmit/Receive data in non-blocking mode using DMA  
+  * @param  hi2s: pointer to a I2S_HandleTypeDef structure that contains
+  *         the configuration information for I2S module
+  * @param pTxData: a 16-bit pointer to the Transmit data buffer.
+  * @param pRxData: a 16-bit pointer to the Receive data buffer.
+  * @param Size: number of data sample to be sent:
+  * @note When a 16-bit data frame or a 16-bit data frame extended is selected during the I2S
+  *       configuration phase, the Size parameter means the number of 16-bit data length 
+  *       in the transaction and when a 24-bit data frame or a 32-bit data frame is selected 
+  *       the Size parameter means the number of 16-bit data length. 
+  * @note The I2S is kept enabled at the end of transaction to avoid the clock de-synchronization 
+  *       between Master and Slave(example: audio streaming).
+  * @retval HAL status
+  */
+HAL_StatusTypeDef HAL_I2SEx_TransmitReceive_DMA_Workaround(I2S_HandleTypeDef *hi2s, uint16_t *pTxData, uint16_t *pRxData, uint16_t Size)
+{
+  uint32_t *tmp;
+  uint32_t tmp1 = 0, tmp2 = 0;
+    
+  if((pTxData == NULL ) || (pRxData == NULL ) || (Size == 0)) 
+  {
+    return  HAL_ERROR;
+  }
+
+  if(hi2s->State == HAL_I2S_STATE_READY)
+  {
+    hi2s->pTxBuffPtr = pTxData;
+    hi2s->pRxBuffPtr = pRxData;
+
+    tmp1 = hi2s->Instance->I2SCFGR & (SPI_I2SCFGR_DATLEN | SPI_I2SCFGR_CHLEN);
+    tmp2 = hi2s->Instance->I2SCFGR & (SPI_I2SCFGR_DATLEN | SPI_I2SCFGR_CHLEN);
+    /* Check the Data format: When a 16-bit data frame or a 16-bit data frame extended 
+       is selected during the I2S configuration phase, the Size parameter means the number
+       of 16-bit data length in the transaction and when a 24-bit data frame or a 32-bit data 
+       frame is selected the Size parameter means the number of 16-bit data length. */
+    if((tmp1 == I2S_DATAFORMAT_24B)||\
+       (tmp2 == I2S_DATAFORMAT_32B))
+    {
+      hi2s->TxXferSize = Size*2;
+      hi2s->TxXferCount = Size*2;
+      hi2s->RxXferSize = Size*2;
+      hi2s->RxXferCount = Size*2;
+    }
+    else
+    {
+      hi2s->TxXferSize = Size;
+      hi2s->TxXferCount = Size;
+      hi2s->RxXferSize = Size;
+      hi2s->RxXferCount = Size;
+    }
+
+    /* Process Locked */
+    __HAL_LOCK(hi2s);
+
+    hi2s->State = HAL_I2S_STATE_BUSY_TX_RX;
+    hi2s->ErrorCode = HAL_I2S_ERROR_NONE;
+
+    /* Set the I2S Rx DMA Half transfer complete callback */
+    hi2s->hdmarx->XferHalfCpltCallback = I2S_DMARxHalfCplt;
+
+    /* Set the I2S Rx DMA transfer complete callback */
+    hi2s->hdmarx->XferCpltCallback = I2S_DMARxCplt;
+
+    /* Set the I2S Rx DMA error callback */
+    hi2s->hdmarx->XferErrorCallback = I2S_DMAError;
+
+    /* Set the I2S Tx DMA Half transfer complete callback */
+    hi2s->hdmatx->XferHalfCpltCallback = I2S_DMATxHalfCplt;
+
+    /* Set the I2S Tx DMA transfer complete callback */
+    hi2s->hdmatx->XferCpltCallback = I2S_DMATxCplt;
+
+    /* Set the I2S Tx DMA error callback */
+    hi2s->hdmatx->XferErrorCallback = I2S_DMAError;
+
+    tmp1 = hi2s->Instance->I2SCFGR & SPI_I2SCFGR_I2SCFG;
+    tmp2 = hi2s->Instance->I2SCFGR & SPI_I2SCFGR_I2SCFG;
+    /* Check if the I2S_MODE_MASTER_TX or I2S_MODE_SLAVE_TX Mode is selected */
+    if((tmp1 == I2S_MODE_MASTER_TX) || (tmp2 == I2S_MODE_SLAVE_TX))
+    {
+      /* Enable the Rx DMA Stream */
+      tmp = (uint32_t*)&pRxData;
+      HAL_DMA_Start_IT(hi2s->hdmarx, (uint32_t)&I2SxEXT(hi2s->Instance)->DR, *(uint32_t*)tmp, hi2s->RxXferSize);
+
+      /* Enable Rx DMA Request */  
+      I2SxEXT(hi2s->Instance)->CR2 |= SPI_CR2_RXDMAEN;
+
+      /* Enable the Tx DMA Stream */
+      tmp = (uint32_t*)&pTxData;
+      HAL_DMA_Start_IT(hi2s->hdmatx, *(uint32_t*)tmp, (uint32_t)&hi2s->Instance->DR, hi2s->TxXferSize);
+
+      /* Enable Tx DMA Request */  
+      hi2s->Instance->CR2 |= SPI_CR2_TXDMAEN;
+
+      /* Check if the I2S is already enabled */ 
+      if((hi2s->Instance->I2SCFGR &SPI_I2SCFGR_I2SE) != SPI_I2SCFGR_I2SE)
+      {
+          //
+           //WS issue workaround: to do move in HAL_I2SEx_TransmitReceive_DMA() 
+           __disable_interrupt_section_in();
+           //WaitForWCLK(0);
+           while (0!=(GPIOA->IDR & GPIO_PIN_15));
+           //WaitForWCLK(1);
+           while (0==(GPIOA->IDR & GPIO_PIN_15));
+          /* Enable I2Sext(receiver) before enabling I2Sx peripheral */
+          I2SxEXT(hi2s->Instance)->I2SCFGR |= SPI_I2SCFGR_I2SE;
+          /* Enable I2S peripheral after the I2Sext */
+         __HAL_I2S_ENABLE(hi2s);
+         //
+         __disable_interrupt_section_out();
+      }
+    }
+    else
+    {    
+      /* Enable the Tx DMA Stream */
+      tmp = (uint32_t*)&pTxData;
+      HAL_DMA_Start_IT(hi2s->hdmatx, *(uint32_t*)tmp, (uint32_t)&I2SxEXT(hi2s->Instance)->DR, hi2s->TxXferSize);
+
+      /* Enable Tx DMA Request */  
+      I2SxEXT(hi2s->Instance)->CR2 |= SPI_CR2_TXDMAEN;
+
+      /* Enable the Rx DMA Stream */
+      tmp = (uint32_t*)&pRxData;
+      HAL_DMA_Start_IT(hi2s->hdmarx, (uint32_t)&hi2s->Instance->DR, *(uint32_t*)tmp, hi2s->RxXferSize);
+
+      /* Enable Rx DMA Request */  
+      hi2s->Instance->CR2 |= SPI_CR2_RXDMAEN;
+
+      /* Check if the I2S is already enabled */ 
+      if((hi2s->Instance->I2SCFGR &SPI_I2SCFGR_I2SE) != SPI_I2SCFGR_I2SE)
+      {
+          //WS issue workaround: to do move in HAL_I2SEx_TransmitReceive_DMA() 
+          __disable_interrupt_section_in();
+          WaitForWCLK(0);
+          WaitForWCLK(1);
+         /* Enable I2S peripheral after the I2Sext */
+         __HAL_I2S_ENABLE(hi2s);
+         //
+         __disable_interrupt_section_out();
+
+        /* Enable I2Sext(transmitter) after enabling I2Sx peripheral */
+        I2SxEXT(hi2s->Instance)->I2SCFGR |= SPI_I2SCFGR_I2SE;
+      }
+      else
+      {
+        /* Check if Master Receiver mode is selected */
+        if((hi2s->Instance->I2SCFGR & SPI_I2SCFGR_I2SCFG) == I2S_MODE_MASTER_RX)
+        {
+          /* Clear the Overrun Flag by a read operation on the SPI_DR register followed by a read
+          access to the SPI_SR register. */ 
+          __HAL_I2S_CLEAR_OVRFLAG(hi2s);
+        }
+      }
+    }
+
+    /* Process Unlocked */
+    __HAL_UNLOCK(hi2s);
+
+    return HAL_OK;
+  }
+  else
+  {
+    return HAL_BUSY;
+  }
+}
+
 /*-------------------------------------------
 | Name:MX_I2S3_Init
 | Description:
@@ -242,16 +421,12 @@ void SPI3_IRQHandler(void) {
 | See:
 ---------------------------------------------*/
 static void MX_I2S3_Init(void)
-{
-  //
-  g_stm32f4xx_i2s_3_info.desc_r = INVALID_DESC;
-  g_stm32f4xx_i2s_3_info.desc_w = INVALID_DESC;
-  
+{ 
   //
   g_stm32f4xx_i2s_3_info.hi2s3.Instance = SPI3;
   g_stm32f4xx_i2s_3_info.hi2s3.Init.Mode = I2S_MODE_SLAVE_TX;
   g_stm32f4xx_i2s_3_info.hi2s3.Init.Standard = I2S_STANDARD_PHILLIPS;
-  g_stm32f4xx_i2s_3_info.hi2s3.Init.DataFormat = I2S_DATAFORMAT_32B;
+  g_stm32f4xx_i2s_3_info.hi2s3.Init.DataFormat = I2S_DATAFORMAT_24B;//I2S_DATAFORMAT_32B;
   g_stm32f4xx_i2s_3_info.hi2s3.Init.MCLKOutput = I2S_MCLKOUTPUT_DISABLE;
   g_stm32f4xx_i2s_3_info.hi2s3.Init.AudioFreq = I2S_AUDIOFREQ_48K;
   g_stm32f4xx_i2s_3_info.hi2s3.Init.CPOL = I2S_CPOL_LOW;
@@ -336,8 +511,8 @@ static void HAL_I2S3_MspInit(stm32f4xx_i2s_3_info_t* stm32f4xx_i2s_3_info)
    stm32f4xx_i2s_3_info->hdma_i2s3_ext_rx.Init.Priority = DMA_PRIORITY_VERY_HIGH;
    stm32f4xx_i2s_3_info->hdma_i2s3_ext_rx.Init.FIFOMode = DMA_FIFOMODE_ENABLE;
    stm32f4xx_i2s_3_info->hdma_i2s3_ext_rx.Init.FIFOThreshold = DMA_FIFO_THRESHOLD_HALFFULL;
-   stm32f4xx_i2s_3_info->hdma_i2s3_ext_rx.Init.MemBurst = DMA_MBURST_INC4;
-   stm32f4xx_i2s_3_info->hdma_i2s3_ext_rx.Init.PeriphBurst = DMA_PBURST_INC4;
+   stm32f4xx_i2s_3_info->hdma_i2s3_ext_rx.Init.MemBurst = DMA_MBURST_SINGLE;//DMA_MBURST_INC4;
+   stm32f4xx_i2s_3_info->hdma_i2s3_ext_rx.Init.PeriphBurst = DMA_PBURST_SINGLE;//DMA_PBURST_INC4;
    HAL_DMA_Init(&stm32f4xx_i2s_3_info->hdma_i2s3_ext_rx);
 
    __HAL_LINKDMA(&stm32f4xx_i2s_3_info->hi2s3,hdmarx,stm32f4xx_i2s_3_info->hdma_i2s3_ext_rx);
@@ -353,8 +528,8 @@ static void HAL_I2S3_MspInit(stm32f4xx_i2s_3_info_t* stm32f4xx_i2s_3_info)
    stm32f4xx_i2s_3_info->hdma_spi3_tx.Init.Priority = DMA_PRIORITY_VERY_HIGH;
    stm32f4xx_i2s_3_info->hdma_spi3_tx.Init.FIFOMode = DMA_FIFOMODE_ENABLE;
    stm32f4xx_i2s_3_info->hdma_spi3_tx.Init.FIFOThreshold = DMA_FIFO_THRESHOLD_HALFFULL;
-   stm32f4xx_i2s_3_info->hdma_spi3_tx.Init.MemBurst = DMA_MBURST_INC4;
-   stm32f4xx_i2s_3_info->hdma_spi3_tx.Init.PeriphBurst = DMA_PBURST_INC4;
+   stm32f4xx_i2s_3_info->hdma_spi3_tx.Init.MemBurst = DMA_MBURST_SINGLE;//DMA_MBURST_INC4;
+   stm32f4xx_i2s_3_info->hdma_spi3_tx.Init.PeriphBurst =  DMA_PBURST_SINGLE;//DMA_PBURST_INC4;
    HAL_DMA_Init(&stm32f4xx_i2s_3_info->hdma_spi3_tx);
 
    __HAL_LINKDMA(&stm32f4xx_i2s_3_info->hi2s3,hdmatx,stm32f4xx_i2s_3_info->hdma_spi3_tx);
@@ -370,7 +545,13 @@ static void HAL_I2S3_MspInit(stm32f4xx_i2s_3_info_t* stm32f4xx_i2s_3_info)
 ---------------------------------------------*/
 int dev_stm32f4xx_i2s_3_load(){
    //
-   MX_I2S3_Init();
+   g_stm32f4xx_i2s_3_info.desc_r = INVALID_DESC;
+   g_stm32f4xx_i2s_3_info.desc_w = INVALID_DESC;
+   //
+   //MX_I2S3_Init();
+   //
+   kernel_ring_buffer_init(&krb_i2s_audio_channel_adc_input,i2s_audio_channel_adc_input_buffer,I2S_AUDIO_CHANNEL_ADC_INPUT_SZ);
+   kernel_ring_buffer_init(&krb_i2s_audio_channel_dac_output,i2s_audio_channel_dac_output_buffer,I2S_AUDIO_CHANNEL_DAC_OUTPUT_SZ);
    //
    return 0;
 }
@@ -411,13 +592,12 @@ int dev_stm32f4xx_i2s_3_open(desc_t desc, int o_flag){
       //HAL_NVIC_SetPriority(DMA1_Stream5_IRQn, 0, 0);
       NVIC_SetPriority(DMA1_Stream5_IRQn, (1 << __NVIC_PRIO_BITS) -3);
       HAL_NVIC_EnableIRQ(DMA1_Stream5_IRQn);
-      
+      //
       __HAL_I2S_ENABLE_IT(&g_stm32f4xx_i2s_3_info.hi2s3, I2S_IT_TXE);
       __HAL_I2S_ENABLE_IT(&g_stm32f4xx_i2s_3_info.hi2s3, I2S_IT_RXNE);
       __HAL_I2S_ENABLE_IT(&g_stm32f4xx_i2s_3_info.hi2s3, I2S_IT_ERR);
-      
       //
-      status = HAL_I2SEx_TransmitReceive_DMA(&g_stm32f4xx_i2s_3_info.hi2s3, (uint16_t*)&TxBuffer[0], (uint16_t*)&RxBuffer[0], SAMPLES_PER_BUFFER * 2);
+      status = HAL_I2SEx_TransmitReceive_DMA_Workaround(&g_stm32f4xx_i2s_3_info.hi2s3, (uint16_t*)&TxBuffer[0], (uint16_t*)&RxBuffer[0], SAMPLES_PER_BUFFER * 2);
       //
    }
   //
@@ -466,7 +646,10 @@ int dev_stm32f4xx_i2s_3_close(desc_t desc){
 | See:
 ---------------------------------------------*/
 int dev_stm32f4xx_i2s_3_isset_read(desc_t desc){
-  return -1;
+   if(__kernel_ring_buffer_is_not_empty(krb_i2s_audio_channel_adc_input)){
+      return 0;
+   }
+   return -1;
 }
 
 /*-------------------------------------------
@@ -478,7 +661,11 @@ int dev_stm32f4xx_i2s_3_isset_read(desc_t desc){
 | See:
 ---------------------------------------------*/
 int dev_stm32f4xx_i2s_3_isset_write(desc_t desc){
-   return -1;
+   //if(audio_ring_buffer_channel[I2S_AUDIO_CHANNEL_DAC_OUTPUT].r==audio_ring_buffer_channel[I2S_AUDIO_CHANNEL_DAC_OUTPUT].w){
+   //return 0;
+   //}
+   //return -1;
+   return 0;
 }
 /*-------------------------------------------
 | Name:dev_stm32f4xx_i2s_3_read
@@ -489,7 +676,7 @@ int dev_stm32f4xx_i2s_3_isset_write(desc_t desc){
 | See:
 ---------------------------------------------*/
 int dev_stm32f4xx_i2s_3_read(desc_t desc, char* buf,int size){
-   return -1;
+  return kernel_ring_buffer_read(&krb_i2s_audio_channel_adc_input,(uint8_t*)buf,size);  
 }
 
 /*-------------------------------------------
@@ -501,7 +688,11 @@ int dev_stm32f4xx_i2s_3_read(desc_t desc, char* buf,int size){
 | See:
 ---------------------------------------------*/
 int dev_stm32f4xx_i2s_3_write(desc_t desc, const char* buf,int size){
-   return -1;
+   int cb = kernel_ring_buffer_write(&krb_i2s_audio_channel_dac_output,(uint8_t*)buf,size);
+   if(cb>0){
+      __fire_io_int(ofile_lst[g_stm32f4xx_i2s_3_info.desc_w].owner_pthread_ptr_write);
+   }
+   return cb;
 }
 
 /*-------------------------------------------

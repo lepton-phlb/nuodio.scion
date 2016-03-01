@@ -29,11 +29,12 @@ either the MPL or the [eCos GPL] License."
 /*===========================================
 Includes
 =============================================*/
+#include "kernel/core/kernelconf.h"
+#include "kernel/core/system.h"
 #include "kernel/core/signal.h"
 #include "kernel/core/libstd.h"
 #include "kernel/core/stat.h"
 #include "kernel/core/statvfs.h"
-#include "kernel/core/devio.h"
 #include "kernel/core/time.h"
 #include "kernel/core/wait.h"
 #include "kernel/core/fcntl.h"
@@ -44,6 +45,7 @@ Includes
 #include "kernel/core/ioctl_lcd.h"
 #include "kernel/core/ioctl_fb.h"
 //
+#include "lib/libc/unistd.h"
 #include "lib/libc/stdio/stdio.h"
 
 #include "kernel/dev/bsp/hybrid_tube/dev_hybrid_tube_peripherals/ioctl_rotary_encoder.h"
@@ -59,6 +61,10 @@ Implementation
 =============================================*/
 #define DEFAULT_GAIN_IN    255 
 #define DEFAULT_GAIN_OUT   255
+
+//#define TEST_USB_AUDIO
+//#define TEST_ADC_DAC
+
 /*-------------------------------------------
 | Name:tstboard_main
 | Description:
@@ -85,6 +91,8 @@ int tstboard_main(int argc,char* argv[]){
    
    int fd_gpio;
    int fd_i2s3;
+   
+   int fd_usbaudio;
    
    
    uchar8_t rotary_switch1=0;
@@ -177,7 +185,15 @@ int tstboard_main(int argc,char* argv[]){
    write(fd_g_outr,&u8_resistor,1);
    write(fd_g_outl,&u8_resistor,1);
    
+   //usb audio
+#ifdef TEST_USB_AUDIO
+   if(( fd_usbaudio = open("/dev/usbaudio",O_RDWR,0))<0)
+      return -1;
+   printf("usb audio open\r\n");
+#endif
+   
    //gpio audio routing
+#ifdef TEST_ADC_DAC
    if((fd_gpio=open("/dev/gpio",O_RDWR,0))<0)
       return -1;
    printf("gpio open\r\n");
@@ -188,7 +204,7 @@ int tstboard_main(int argc,char* argv[]){
    if((fd_i2s3=open("/dev/i2s3",O_RDWR,0))<0)
       return -1;
    printf("i2s3 open\r\n");
-   
+#endif
    
    //
    FD_ZERO(&readfs);

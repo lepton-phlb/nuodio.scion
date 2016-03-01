@@ -1,5 +1,6 @@
-#shelf  scion					version	    depot location													scion location in depot
-nuodio  hybrid.tube::prototyp.1 master      https://github.com/lepton-phlb/nuodio.scion.git                 bsp/prototyp.1
-nuodio 	hybrid.tube::base  		master 		https://github.com/lepton-phlb/nuodio.scion.git            		executive/base
-nuodio 	hybrid.tube::binaries   master      https://github.com/lepton-phlb/nuodio.scion.git                 binaries
+#shelf  	scion						version	    depot location													    scion location in depot
+lepton  	cuttings::stm32f4-usb-core  master      https://github.com/lepton-distribution/lepton-cuttings.scions.git   stm32f4-usb-core
+nuodio  	hybrid.tube::prototyp.1 	master      https://github.com/lepton-phlb/nuodio.scion.git                 	bsp/prototyp.1
+nuodio 		hybrid.tube::base  			master 		https://github.com/lepton-phlb/nuodio.scion.git            			executive/base
+nuodio 		hybrid.tube::binaries   	master      https://github.com/lepton-phlb/nuodio.scion.git                 	binaries
 

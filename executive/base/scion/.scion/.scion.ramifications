@@ -1,3 +1,4 @@
-nuodio  hybrid.tube::prototyp.1	master
-nuodio 	hybrid.tube::base   	master
-nuodio 	hybrid.tube::binaries   master
+lepton  	cuttings::stm32f4-usb-core	master
+nuodio  	hybrid.tube::prototyp.1		master
+nuodio 		hybrid.tube::base   		master
+nuodio 		hybrid.tube::binaries   	master

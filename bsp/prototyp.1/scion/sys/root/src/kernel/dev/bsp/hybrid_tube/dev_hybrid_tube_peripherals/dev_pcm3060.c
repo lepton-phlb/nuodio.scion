@@ -39,6 +39,7 @@ either the MPL or the [eCos GPL] License."
 #include "kernel/core/ioctl.h"
 #include "kernel/core/ioctl_spi.h"
 #include "kernel/core/fcntl.h"
+#include "kernel/core/stat.h"
 #include "kernel/core/cpu.h"
 #include "kernel/fs/vfs/vfsdev.h"
 

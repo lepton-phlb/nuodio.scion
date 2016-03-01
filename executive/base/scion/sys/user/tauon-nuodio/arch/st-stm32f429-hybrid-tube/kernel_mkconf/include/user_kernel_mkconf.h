@@ -35,12 +35,18 @@ Compiler Directive
 #define __file_system_profile__  __file_system_profile_classic__
 #define __KERNEL_VFS_SUPPORT_EFFS   0
 
+//kernel printk on /dev/console
+#define __KERNEL_PRINTK
+//kernel trace_printk on /dev/trace
+#define __KERNEL_TRACE_PRINTK
+//kernel console for initd and printk dev output on /dev/console stream
+#define __KERNEL_DEV_TTY "/dev/ttys3"
+
 //ip stack
 //#define USE_UIP 
 //#define USE_LWIP
 //#define USE_IF_ETHERNET
 //specific target include for pinout definition
-
 #include "kernel/dev/bsp/hybrid_tube/dev_hybrid_tube_board/dev_hybrid_tube_board.h"
 
 #define __USER_MONGOOSE_PTHREAD_STACK_SIZE   (8*1024)

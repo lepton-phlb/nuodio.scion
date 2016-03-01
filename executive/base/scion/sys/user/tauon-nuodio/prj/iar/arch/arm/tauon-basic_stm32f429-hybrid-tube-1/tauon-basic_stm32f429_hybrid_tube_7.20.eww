@@ -11,6 +11,9 @@
     <path>$WS_DIR$\..\..\..\..\..\..\..\root\prj\iar\nuodio\binaries\nuodio_binaries_7.30.ewp</path>
   </project>
   <project>
+    <path>$WS_DIR$\..\..\..\..\..\..\..\root\prj\iar\arch\arm\stm32f4-usb-core\stm32f4_usb_core.ewp</path>
+  </project>
+  <project>
     <path>$WS_DIR$\..\..\..\..\..\..\..\root\prj\iar\arch\arm\tauon\tauon_7.20.ewp</path>
   </project>
   <project>
@@ -25,6 +28,10 @@
       </member>
       <member>
         <project>dev_stm32f4xx_7.20</project>
+        <configuration>Debug</configuration>
+      </member>
+      <member>
+        <project>stm32f4_usb_core</project>
         <configuration>Debug</configuration>
       </member>
       <member>

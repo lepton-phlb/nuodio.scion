@@ -39,6 +39,7 @@ either the MPL or the [eCos GPL] License."
 #include "kernel/core/ioctl.h"
 #include "kernel/core/ioctl_spi.h"
 #include "kernel/core/fcntl.h"
+#include "kernel/core/stat.h"
 #include "kernel/core/cpu.h"
 #include "kernel/fs/vfs/vfsdev.h"
 
@@ -104,7 +105,7 @@ dev_map_t dev_ad5262_map={
 ==============================================*/
 
 /*-------------------------------------------
-| Name:dev_rotary_encoder_x_load
+| Name:dev_ad5262_load
 | Description:
 | Parameters:
 | Return Type:
