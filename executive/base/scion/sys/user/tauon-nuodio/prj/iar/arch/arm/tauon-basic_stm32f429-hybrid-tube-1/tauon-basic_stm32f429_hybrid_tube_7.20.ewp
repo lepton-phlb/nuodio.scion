@@ -128,7 +128,7 @@
         <option>
           <name>GBECoreSlave</name>
           <version>22</version>
-          <state>40</state>
+          <state>39</state>
         </option>
         <option>
           <name>OGUseCmsis</name>
@@ -615,7 +615,7 @@
         <option>
           <name>OOCOutputFormat</name>
           <version>3</version>
-          <state>0</state>
+          <state>1</state>
         </option>
         <option>
           <name>OCOutputOverride</name>
@@ -623,7 +623,7 @@
         </option>
         <option>
           <name>OOCOutputFile</name>
-          <state>tauon-basic_stm32f429_hybrid_tube_7.20.srec</state>
+          <state>tauon-basic_stm32f429_hybrid_tube_7.20.hex</state>
         </option>
         <option>
           <name>OOCCommandLineProducer</name>
@@ -631,7 +631,7 @@
         </option>
         <option>
           <name>OOCObjCopyEnable</name>
-          <state>0</state>
+          <state>1</state>
         </option>
       </data>
     </settings>
