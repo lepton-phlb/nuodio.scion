@@ -12,11 +12,11 @@
 
 <kernel>
       <target name="win32_lepton">
-         <arch include_absolute_path="C:\tauon\sys\user\tauon-nuodio\src/arch/win32/kernel_mkconf/include/user_kernel_mkconf.h" />
+         <arch include_absolute_path="C:\tauon\sys\user\tauon-nuodio\arch/win32/kernel_mkconf/include/user_kernel_mkconf.h" />
       </target>
       
       <target name="cortexm_lepton">
-         <arch include_absolute_path="C:\tauon\sys\user\tauon-nuodio\arch\st-stm32f429-hybrid-tube\kernel_mkconf\include\user_kernel_mkconf.h" />
+         <arch include_absolute_path="C:\tauon\sys\user\tauon-nuodio\arch\win32\kernel_mkconf\includeuser_kernel_mkconf.h" />
       </target>
       
       <!-- cpu type and frequency in MHz or Hz-->
@@ -92,8 +92,14 @@
        <dev name="dev_win32_com0_map" use="on"/>
        <!-- /dev/rtc0 -->
        <dev name="dev_win32_rtc_map" use="on"/>
-       <!-- /dev/eth0 -->
-       <dev name="dev_win32_eth_map" use="on"/>
+       <!-- /dev/kbw32 -->
+       <dev name="dev_win32_kb_map" use="on"/>
+       <!-- /dev/tty0 -->
+       <dev name="dev_tty_map"  use="on"/>
+       <!-- /dev/lcd0 -->
+       <dev name="dev_win32_lcd_matrix_map" use="on"/>
+       <!-- /dev/rotry1 -->
+       <dev name="dev_win32_rotary_switch_1_map" use="on"/>
    </devices>
 </target>
 
@@ -196,22 +202,33 @@
 
 <!-- user binaries. -->
 <!-- /usr/bin -->
-<binaries src_path="bin" dest_path="bin">
-        <bin name="tstboard"        stack="2048"    priority="50"  timeslice="1" />
-        <bin name="adda"            stack="2048"    priority="130"  timeslice="1" />
-        <bin name="tstusb"          stack="2048"    priority="130"  timeslice="1" />
-        <!--bin name="udpsrvd"      stack="2048"    priority="10" timeslice="5" /-->
-</binaries>
 
-<!-- /usr/bin -->
-<binaries src_path="bin/nuodio" dest_path="bin/nuodio">
-        <bin name="tstboard"        stack="2048"    priority="100"  timeslice="5" />
-</binaries>
+<target name="win32_lepton">
+  <binaries src_path="bin" dest_path="bin">
+    <bin name="test2"        stack="1024"    priority="100" timeslice="5" />
+  </binaries>
+</target>
+
+<target name="cortexm_lepton">
+  <binaries src_path="bin" dest_path="bin">
+          <bin name="tstboard"        stack="2048"    priority="50"  timeslice="1" />
+          <bin name="adda"            stack="2048"    priority="130"  timeslice="1" />
+          <bin name="tstusb"          stack="2048"    priority="130"  timeslice="1" />
+          <!--bin name="udpsrvd"      stack="2048"    priority="10" timeslice="5" /-->
+  </binaries>
+
+  <!-- /usr/bin -->
+  <binaries src_path="bin/nuodio" dest_path="bin/nuodio">
+          <bin name="tstboard"        stack="2048"    priority="100"  timeslice="5" />
+  </binaries>
+</target>
+
+
 
 <files>
    <!-- /usr/etc  (hda internal flash mount on /bin) -->
    <target name="win32_lepton">
-      <file name=".init"      src_file="C:\tauon\sys\user\tauon-nuodio\etc\.init_win32_with_net"      dest_path="etc" />
+      <file name=".init"      src_file="C:\tauon\sys\user\tauon-nuodio\etc\.init_win32"      dest_path="etc" />
    </target>
     <target name="cortexm_lepton">
       <file name=".init"      src_file="C:\tauon\sys\user\tauon-nuodio\etc\.init_nuodio_test"  dest_path="etc" />
