@@ -29,6 +29,7 @@ either the MPL or the [eCos GPL] License."
 /*============================================
 | Includes
 ==============================================*/
+#include <stdint.h>
 
 #include "kernel/core/kernelconf.h"
 #include "kernel/core/types.h"
@@ -41,7 +42,7 @@ either the MPL or the [eCos GPL] License."
 #include "kernel/core/fcntl.h"
 #include "kernel/core/stat.h"
 #include "kernel/core/cpu.h"
-#include "kernel/fs/vfs/vfsdev.h"
+#include "kernel/fs/vfs/vfstypes.h"
 #include "kernel/core/kernel_ring_buffer.h"
 
 #include "kernel/dev/bsp/hybrid_tube/cubemx_hal/gpio.h"

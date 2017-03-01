@@ -29,6 +29,7 @@ either the MPL or the [eCos GPL] License."
 /*============================================
 | Includes
 ==============================================*/
+#include <stdint.h>
 
 #include "kernel/core/kernelconf.h"
 #include "kernel/core/types.h"
@@ -39,7 +40,7 @@ either the MPL or the [eCos GPL] License."
 #include "kernel/core/ioctl_spi.h"
 #include "kernel/core/fcntl.h"
 #include "kernel/core/cpu.h"
-#include "kernel/fs/vfs/vfsdev.h"
+#include "kernel/fs/vfs/vfstypes.h"
 
 #include "kernel/dev/arch/cortexm/stm32f4xx/driverlib/stm32f4xx.h"
 #include "kernel/dev/arch/cortexm/stm32f4xx/types.h"
@@ -267,8 +268,8 @@ void dev_rotary_encoder_x_interrupt(rotary_encoder_info_t* rotary_encoder_info){
    //
    if(EXTI_GetITStatus(rotary_encoder_info->EXTI_Line) != RESET){
       //
-      uchar8_t pin_a = GPIO_ReadInputDataBit(rotary_encoder_info->pin_a.gpio_bank_no,rotary_encoder_info->pin_a.gpio_pin_no);
-      uchar8_t pin_b = GPIO_ReadInputDataBit(rotary_encoder_info->pin_b.gpio_bank_no,rotary_encoder_info->pin_b.gpio_pin_no);
+      uint8_t pin_a = GPIO_ReadInputDataBit(rotary_encoder_info->pin_a.gpio_bank_no,rotary_encoder_info->pin_a.gpio_pin_no);
+      uint8_t pin_b = GPIO_ReadInputDataBit(rotary_encoder_info->pin_b.gpio_bank_no,rotary_encoder_info->pin_b.gpio_pin_no);
       
        if (pin_a == pin_b) {
          rotary_encoder_info->counter++;
@@ -464,8 +465,8 @@ int dev_rotary_encoder_x_ioctl(desc_t desc,int request,va_list ap){
    //
    switch(request) {
       case ROTRYSWTCH:{
-         uchar8_t* p_vu8= va_arg( ap, uchar8_t*);
-         uchar8_t pin_s = GPIO_ReadInputDataBit(rotary_encoder_info->pin_s.gpio_bank_no,rotary_encoder_info->pin_s.gpio_pin_no);
+         uint8_t* p_vu8= va_arg( ap, uint8_t*);
+         uint8_t pin_s = GPIO_ReadInputDataBit(rotary_encoder_info->pin_s.gpio_bank_no,rotary_encoder_info->pin_s.gpio_pin_no);
          *p_vu8 = pin_s;
       }
       break;

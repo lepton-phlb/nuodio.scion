@@ -72,8 +72,8 @@ typedef struct rotary_encoder_info_st{
   //reserved: filled by system
   desc_t desc_r;
   uint32_t EXTI_Line;
-  uchar8_t input_r;
-  uchar8_t input_w;
+  uint8_t input_r;
+  uint8_t input_w;
   //
   int16_t counter;
 

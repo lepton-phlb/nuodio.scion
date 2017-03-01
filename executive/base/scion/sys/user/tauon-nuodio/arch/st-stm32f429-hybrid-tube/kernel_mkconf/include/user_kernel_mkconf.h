@@ -34,6 +34,7 @@ Compiler Directive
 //force EFFS for stm32f407 on olimex-stm32-p407 board
 #define __file_system_profile__  __file_system_profile_classic__
 #define __KERNEL_VFS_SUPPORT_EFFS   0
+#define __KERNEL_VFS_SUPPORT_FATFS  1
 
 //kernel printk on /dev/console
 #define __KERNEL_PRINTK
@@ -41,6 +42,11 @@ Compiler Directive
 #define __KERNEL_TRACE_PRINTK
 //kernel console for initd and printk dev output on /dev/console stream
 #define __KERNEL_DEV_TTY "/dev/ttys3"
+
+//kernel usb core specific definition
+#define __KERNEL_USB_CORE_MANUFACTURER_STRING   "nuodio"
+#define __KERNEL_USB_CORE_PRODUCT_STRING        "nuodio tube"
+#define __KERNEL_USB_CORE_SERIALNUMBER_STRING   "000000000020"  
 
 //ip stack
 //#define USE_UIP 

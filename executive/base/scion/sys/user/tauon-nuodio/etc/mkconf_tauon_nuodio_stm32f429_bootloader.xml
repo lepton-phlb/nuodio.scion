@@ -236,7 +236,7 @@
       <file name=".init"      src_file="C:\tauon\sys\user\tauon-nuodio\etc\.init_win32"      dest_path="etc" />
    </target>
     <target name="cortexm_lepton">
-      <file name=".init"      src_file="C:\tauon\sys\user\tauon-nuodio\etc\.init_nuodio_test"  dest_path="etc" />
+      <file name=".init"      src_file="C:\tauon\sys\user\tauon-nuodio\etc\.init_nuodio_bootloader"  dest_path="etc" />
    </target>
    <file name=".boot"      src_file="C:\tauon\sys\user\tauon-nuodio\etc/.boot"               dest_path="etc" />
    <file name=".mount"     src_file="C:\tauon\sys\user\tauon-nuodio\etc/.mount"              dest_path="etc" />

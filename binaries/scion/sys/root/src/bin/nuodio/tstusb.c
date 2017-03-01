@@ -29,6 +29,7 @@ either the MPL or the [eCos GPL] License."
 /*===========================================
 Includes
 =============================================*/
+#include <stdint.h>
 #include <math.h>
 
 #include "kernel/core/kernelconf.h"

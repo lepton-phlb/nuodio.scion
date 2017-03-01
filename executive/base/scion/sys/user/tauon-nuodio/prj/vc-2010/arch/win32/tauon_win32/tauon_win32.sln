@@ -24,6 +24,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "net-lwip", "..\..\..\..\..\
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "dev-bsp-nu.tube", "..\..\..\..\..\..\..\..\..\lepton\rootstock-mainline\depots\nuodio\hybrid.tube\master\bsp\prototyp.1\scion\sys\root\prj\vc-2010\dev-bsp-nu.tube\dev-bsp-nu.tube\dev-bsp-nu.tube.vcxproj", "{031A1632-222B-4FB4-A575-AD2F75BEC0D3}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "xgui", "..\..\..\..\..\..\..\root\prj\vc-2010\xgui\xgui\xgui.vcxproj", "{B270117D-B404-4E57-A028-BFB7C0174D77}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -88,6 +90,14 @@ Global
 		{031A1632-222B-4FB4-A575-AD2F75BEC0D3}.Release|Win32.Build.0 = Release|Win32
 		{031A1632-222B-4FB4-A575-AD2F75BEC0D3}.Release|x64.ActiveCfg = Release|x64
 		{031A1632-222B-4FB4-A575-AD2F75BEC0D3}.Release|x64.Build.0 = Release|x64
+		{B270117D-B404-4E57-A028-BFB7C0174D77}.Debug|Win32.ActiveCfg = Debug|Win32
+		{B270117D-B404-4E57-A028-BFB7C0174D77}.Debug|Win32.Build.0 = Debug|Win32
+		{B270117D-B404-4E57-A028-BFB7C0174D77}.Debug|x64.ActiveCfg = Debug|x64
+		{B270117D-B404-4E57-A028-BFB7C0174D77}.Debug|x64.Build.0 = Debug|x64
+		{B270117D-B404-4E57-A028-BFB7C0174D77}.Release|Win32.ActiveCfg = Release|Win32
+		{B270117D-B404-4E57-A028-BFB7C0174D77}.Release|Win32.Build.0 = Release|Win32
+		{B270117D-B404-4E57-A028-BFB7C0174D77}.Release|x64.ActiveCfg = Release|x64
+		{B270117D-B404-4E57-A028-BFB7C0174D77}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

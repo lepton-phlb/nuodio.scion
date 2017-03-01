@@ -29,6 +29,7 @@ either the MPL or the [eCos GPL] License."
 /*============================================
 | Includes
 ==============================================*/
+#include <stdint.h>
 
 #include "kernel/core/kernelconf.h"
 #include "kernel/core/types.h"
@@ -41,7 +42,7 @@ either the MPL or the [eCos GPL] License."
 #include "kernel/core/fcntl.h"
 #include "kernel/core/stat.h"
 #include "kernel/core/cpu.h"
-#include "kernel/fs/vfs/vfsdev.h"
+#include "kernel/fs/vfs/vfstypes.h"
 
 #include "kernel/dev/arch/cortexm/stm32f4xx/driverlib/stm32f4xx.h"
 #include "kernel/dev/arch/cortexm/stm32f4xx/types.h"
@@ -62,59 +63,59 @@ either the MPL or the [eCos GPL] License."
 
 //
 typedef struct{
-   uchar8_t SE:1;     //b0
-   uchar8_t RSV:3;    //b3,b2,b1
-   uchar8_t DAPSV:1;  //b4
-   uchar8_t ADPSV:1;  //b5
-   uchar8_t SRST:1;   //b6
-   uchar8_t MRST:1;   //b7
+   uint8_t SE:1;     //b0
+   uint8_t RSV:3;    //b3,b2,b1
+   uint8_t DAPSV:1;  //b4
+   uint8_t ADPSV:1;  //b5
+   uint8_t SRST:1;   //b6
+   uint8_t MRST:1;   //b7
 }pcm3060_register_x40_t;
 
 //
 typedef struct{
-  uchar8_t FMT2:2;  //b1,b0
-  uchar8_t RSV:2;    //b3,b2
-  uchar8_t MS:3;     //b6,b5,b4 
-  uchar8_t CSEL2:1;  //b7
+  uint8_t FMT2:2;  //b1,b0
+  uint8_t RSV:2;    //b3,b2
+  uint8_t MS:3;     //b6,b5,b4 
+  uint8_t CSEL2:1;  //b7
 }pcm3060_register_x43_t;
 
 //
 typedef struct{
-   uchar8_t MUT2:2;     //b1,b0;
-   uchar8_t DREV2:1;    //b2
-   uchar8_t RSV2:3;     //b5,b4,b3
-   uchar8_t OVER:1;     //b6 
-   uchar8_t RSV1:1;     //b7
+   uint8_t MUT2:2;     //b1,b0;
+   uint8_t DREV2:1;    //b2
+   uint8_t RSV2:3;     //b5,b4,b3
+   uint8_t OVER:1;     //b6 
+   uint8_t RSV1:1;     //b7
 }pcm3060_register_x44_t;
 
 //
 typedef struct{
-   uchar8_t AZRO:1;   //b0
-   uchar8_t ZREV:1;   //b1 
-   uchar8_t RSV:2;    //b3,b2
-   uchar8_t DMC:1;    //b4 
-   uchar8_t DMF0:1;   //b5  
-   uchar8_t DMF1:1;   //b6
-   uchar8_t FLT:1;    //b7
+   uint8_t AZRO:1;   //b0
+   uint8_t ZREV:1;   //b1 
+   uint8_t RSV:2;    //b3,b2
+   uint8_t DMC:1;    //b4 
+   uint8_t DMF0:1;   //b5  
+   uint8_t DMF1:1;   //b6
+   uint8_t FLT:1;    //b7
 }pcm3060_register_x45_t;
 
 
 //
 typedef struct{
-   uchar8_t FMT1:2;     //b1,b0 
-   uchar8_t RSV:2;      //b3,b2
-   uchar8_t MS:3;       //b6,b5,b4
-   uchar8_t CSEL1:1;    //b7
+   uint8_t FMT1:2;     //b1,b0 
+   uint8_t RSV:2;      //b3,b2
+   uint8_t MS:3;       //b6,b5,b4
+   uint8_t CSEL1:1;    //b7
 }pcm3060_register_x48_t;
 
 
 //
 typedef struct{
-   uchar8_t MUT1:2;     //b0,b1 
-   uchar8_t DREV1:1;    //b2
-   uchar8_t BYP:1;      //b3
-   uchar8_t ZCDD:1;     //b4
-   uchar8_t RSV:3;      //b7,b6,b5
+   uint8_t MUT1:2;     //b0,b1 
+   uint8_t DREV1:1;    //b2
+   uint8_t BYP:1;      //b3
+   uint8_t ZCDD:1;     //b4
+   uint8_t RSV:3;      //b7,b6,b5
 }pcm3060_register_x49_t;
 
 
@@ -200,7 +201,7 @@ dev_map_t dev_pcm3060_map={
 | Comments:
 | See:
 ---------------------------------------------*/
-static int dev_pcm_3060_config_write(pcm3060_info_t* pcm3060_info, uchar8_t register_no, uchar8_t* value){
+static int dev_pcm_3060_config_write(pcm3060_info_t* pcm3060_info, uint8_t register_no, uint8_t* value){
    //
    desc_t desc_spi_w = INVALID_DESC;
    //
@@ -435,11 +436,11 @@ static int dev_pcm3060_ioctl(desc_t desc,int request,va_list ap){
          ofile_lst[desc].p=pcm3060_info;
          //
          //send pcm dac configuration 
-         dev_pcm_3060_config_write(pcm3060_info,0x43,(uchar8_t*)&pcm3060_register_x43_dflt);
+         dev_pcm_3060_config_write(pcm3060_info,0x43,(uint8_t*)&pcm3060_register_x43_dflt);
          //send pcm adc configuration 
-         dev_pcm_3060_config_write(pcm3060_info,0x48,(uchar8_t*)&pcm3060_register_x48_dflt);
+         dev_pcm_3060_config_write(pcm3060_info,0x48,(uint8_t*)&pcm3060_register_x48_dflt);
          //send pcm adc dac in normal mode configuration 
-         dev_pcm_3060_config_write(pcm3060_info,0x40,(uchar8_t*)&pcm3060_register_x40_dflt);
+         dev_pcm_3060_config_write(pcm3060_info,0x40,(uint8_t*)&pcm3060_register_x40_dflt);
          
       }
       break;
