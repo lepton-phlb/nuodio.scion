@@ -41,9 +41,8 @@ either the MPL or the [eCos GPL] License."
 /*============================================
 | Declaration
 ==============================================*/
-#define ROTRYSWTCH         0x0001
-#define ROTRYSETCOUNT      0x0002
-#define ROTRYGETCOUNT      0x0003
+#define ROTRYSWTCH         0x1001 //0x1001 to avoid collision with kernel/core/ioctl_encoder.h
+
 
 
 #endif

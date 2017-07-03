@@ -133,7 +133,12 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\src\kernel\dev\arch\win32\dev-bsp-nu.tube\dev_win32_rotary_switch_1.c" />
+    <ClCompile Include="..\..\..\..\..\..\..\..\..\..\..\..\..\..\..\tauon\sys\root\src\kernel\dev\arch\win32\dev-bsp-nu.tube\dev_win32_rotary_switch_1.c" />
+    <ClCompile Include="..\..\..\..\..\..\..\..\..\..\..\..\..\..\..\tauon\sys\root\src\kernel\dev\arch\win32\dev-bsp-nu.tube\dev_win32_rotary_switch_2.c">
+      <UseFullPaths Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</UseFullPaths>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\..\..\..\..\..\..\..\..\..\tauon\sys\root\src\kernel\dev\arch\win32\dev-bsp-nu.tube\dev_win32_rotary_switch_3.c" />
+    <ClCompile Include="..\..\..\..\..\..\..\..\..\..\..\..\..\..\..\tauon\sys\root\src\kernel\dev\arch\win32\dev-bsp-nu.tube\dev_win32_rotary_switch_4.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

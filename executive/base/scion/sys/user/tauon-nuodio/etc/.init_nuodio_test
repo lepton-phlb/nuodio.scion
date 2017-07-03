@@ -4,6 +4,10 @@ mount /dev/oledio /dev/spi5 /dev/spi5.0
 mount /dev/lcd0 /dev/spi5.0 /dev/lcd0.0
 mount /dev/tty0 /dev/lcd0.0 /dev/tty0.0
 
+#on display
+date > /dev/tty0.0
+echo nuodio > /dev/tty0.0
+
 #spi1.0
 mount /dev/head /dev/spi1 /dev/spi1.0
 #spi4.0
@@ -23,5 +27,10 @@ mount /dev/ad5262 /dev/spi1.0 /dev/r_lvl 1 h.4 i.6 i.7
 #adc/dac pcm3060 cs rst
 mount /dev/pcm3060 /dev/spi4.0 /dev/codec e.3 e.4
 
-date > /dev/tty0.0
-echo nuodio > /dev/tty0.0
+#sdcard
+mkdir /sdcard
+mount -t fatfs /dev/null /sdcard
+
+#gui
+nu > /dev/lcd0.0 &
+

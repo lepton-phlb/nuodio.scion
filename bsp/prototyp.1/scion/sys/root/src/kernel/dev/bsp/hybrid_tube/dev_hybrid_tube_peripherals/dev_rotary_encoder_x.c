@@ -38,6 +38,7 @@ either the MPL or the [eCos GPL] License."
 #include "kernel/core/system.h"
 #include "kernel/core/ioctl.h"
 #include "kernel/core/ioctl_spi.h"
+#include "kernel/core/ioctl_encoder.h"
 #include "kernel/core/fcntl.h"
 #include "kernel/core/cpu.h"
 #include "kernel/fs/vfs/vfstypes.h"
@@ -62,7 +63,7 @@ either the MPL or the [eCos GPL] License."
 | Implementation
 ==============================================*/
 
-static void Encoder_Configration(void)
+static void encoder_Configuration(void)
 {
    TIM_TimeBaseInitTypeDef  TIM_TimeBaseStructure;
    GPIO_InitTypeDef GPIO_InitStructure;
@@ -268,13 +269,32 @@ void dev_rotary_encoder_x_interrupt(rotary_encoder_info_t* rotary_encoder_info){
    //
    if(EXTI_GetITStatus(rotary_encoder_info->EXTI_Line) != RESET){
       //
+      int sign=0;
+      //
       uint8_t pin_a = GPIO_ReadInputDataBit(rotary_encoder_info->pin_a.gpio_bank_no,rotary_encoder_info->pin_a.gpio_pin_no);
       uint8_t pin_b = GPIO_ReadInputDataBit(rotary_encoder_info->pin_b.gpio_bank_no,rotary_encoder_info->pin_b.gpio_pin_no);
       
-       if (pin_a == pin_b) {
-         rotary_encoder_info->counter++;
+      if (pin_a == pin_b) {
+         sign=1;
+         //rotary_encoder_info->counter++;
       } else {
-         rotary_encoder_info->counter--;
+         sign=-1;
+         //rotary_encoder_info->counter--;
+      }
+      //
+      if (rotary_encoder_info->counter_limit_max != rotary_encoder_info->counter_limit_min) {
+         if (sign > 0 && rotary_encoder_info->counter < rotary_encoder_info->counter_limit_max) {
+            rotary_encoder_info->counter+=rotary_encoder_info->counter_step;
+         }else if (sign < 0 && rotary_encoder_info->counter > rotary_encoder_info->counter_limit_min) {
+            rotary_encoder_info->counter-=rotary_encoder_info->counter_step;
+         }
+      }else {
+         if (sign > 0) {
+            rotary_encoder_info->counter+=rotary_encoder_info->counter_step;
+         }
+         else if (sign < 0) {
+            rotary_encoder_info->counter-=rotary_encoder_info->counter_step;
+         }
       }
       //
       if(rotary_encoder_info->input_w==rotary_encoder_info->input_r){
@@ -322,6 +342,10 @@ int dev_rotary_encoder_x_open(desc_t desc, int o_flag, rotary_encoder_info_t* ro
          rotary_encoder_info->input_r=0;
          rotary_encoder_info->input_w=0;
          rotary_encoder_info->counter = 0x80;
+         //
+         rotary_encoder_info->counter_limit_min = 0;
+         rotary_encoder_info->counter_limit_max = 0;
+         rotary_encoder_info->counter_step = 1;
          //
          //Encoder_Configration();
          //encoder_configuration(rotary_encoder_info);
@@ -471,15 +495,32 @@ int dev_rotary_encoder_x_ioctl(desc_t desc,int request,va_list ap){
       }
       break;
       //
-      case ROTRYSETCOUNT:{
-         int32_t* p_counter= va_arg( ap, int32_t*);
-         rotary_encoder_info->counter= *p_counter;
+      case ENCODERSETCOUNTER:{
+         int32_t counter= va_arg( ap, int32_t);
+         rotary_encoder_info->counter= counter;
       }
       break;
       //
-      case ROTRYGETCOUNT:{
+      case ENCODERGETCOUNTER:{
          int32_t* p_counter= va_arg( ap, int32_t*);
          *p_counter = rotary_encoder_info->counter;
+      }
+      break;
+      
+      //
+      case ENCODERSETCOUNTERLIMIT: {
+         int32_t counter_limit_min = va_arg(ap, int32_t);
+         int32_t counter_limit_max = va_arg(ap, int32_t);
+         //
+         rotary_encoder_info->counter_limit_min = counter_limit_min;
+         rotary_encoder_info->counter_limit_max = counter_limit_max;
+      }
+      break;
+
+      case ENCODERSETCOUNTERSTEP: {
+         int32_t counter_step = va_arg(ap, int32_t);
+         //
+         rotary_encoder_info->counter_step = counter_step;
       }
       break;
       //

@@ -33,6 +33,7 @@ either the MPL or the [eCos GPL] License."
 
 #include "kernel/core/kernelconf.h"
 #include "kernel/core/types.h"
+#include "kernel/core/dirent.h"
 #include "kernel/core/interrupt.h"
 #include "kernel/core/kernel.h"
 #include "kernel/core/system.h"

@@ -2,16 +2,10 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <None Include="ReadMe.txt" />
-    <None Include="lepton_com.conf">
-      <Filter>user</Filter>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="root">
       <UniqueIdentifier>{d738653d-e370-4910-9167-77e8f914cdd6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="user">
-      <UniqueIdentifier>{f87212f3-e95d-492f-beff-af0ad0283e1d}</UniqueIdentifier>
     </Filter>
     <Filter Include="root\kernel">
       <UniqueIdentifier>{2f4e74c6-7af3-4a5b-bc94-061bfde45825}</UniqueIdentifier>
@@ -31,12 +25,6 @@
     <Filter Include="root\kernel\core\arch\win32">
       <UniqueIdentifier>{c43821de-781d-41f4-896d-2cc0e1dd85e3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="root\bin">
-      <UniqueIdentifier>{439e4ec2-b2ae-444d-8121-3045eabf35ac}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="user\bin">
-      <UniqueIdentifier>{1ac186b9-abeb-4137-9898-0a02967911aa}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\..\..\..\..\root\src\kernel\core\ucore\embOSW32_100\main.c">
@@ -51,9 +39,6 @@
     <ClCompile Include="..\..\..\..\..\..\..\..\root\src\kernel\core\arch\win32\dev_mkconf.c">
       <Filter>root\kernel\core\arch\win32</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\..\root\src\bin\test2.c">
-      <Filter>root\bin</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\..\..\..\..\root\src\kernel\core\arch\win32\kernel_mkconf.h">
@@ -66,5 +51,7 @@
   <ItemGroup>
     <Library Include="..\..\..\..\..\..\..\..\root\prj\vc-2010\kernel\Debug\kernel.lib" />
     <Library Include="..\Debug\dev-bsp-nu.tube.lib" />
+    <Library Include="..\Debug\xgui.lib" />
+    <Library Include="..\Debug\bin-nuodio.lib" />
   </ItemGroup>
 </Project>

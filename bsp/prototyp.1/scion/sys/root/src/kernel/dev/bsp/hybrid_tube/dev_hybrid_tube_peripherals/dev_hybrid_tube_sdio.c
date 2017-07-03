@@ -32,6 +32,7 @@ either the MPL or the [eCos GPL] License."
 #include <stdint.h>
 
 #include "kernel/core/kernelconf.h"
+#include "kernel/core/dirent.h"
 #include "kernel/core/types.h"
 #include "kernel/core/interrupt.h"
 #include "kernel/core/kernel.h"
@@ -148,6 +149,7 @@ int dev_hybrid_tube_sdio_load(void){
    // workaround force to 0
    /*Configure GPIO pin Output Level */
    HAL_GPIO_WritePin(GPIOD, GPIO_PIN_0, GPIO_PIN_RESET);
+   //HAL_GPIO_WritePin(GPIOD, GPIO_PIN_0, GPIO_PIN_SET);
     
    //
    return 0;

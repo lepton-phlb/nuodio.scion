@@ -56,26 +56,29 @@ typedef struct exti_src_gpio_st{
 
 
 typedef struct rotary_encoder_info_st{
-  //filled by user
-  rotary_encoder_gpio_t pin_a; //signal a
-  rotary_encoder_gpio_t pin_b; //signal b
+   //filled by user
+   rotary_encoder_gpio_t pin_a; //signal a
+   rotary_encoder_gpio_t pin_b; //signal b
 
-  rotary_encoder_gpio_t pin_s;   //swicth s
-  
-  //timer encoder mode
-  TIM_TypeDef* timer_no;  //timer TIM2
-  u8 timer_gpio_af; //GPIO_AF_TIM2
-  
-  //external interrupt mode
-  exti_src_gpio_t exti_pin; //interrupt pin
-  
-  //reserved: filled by system
-  desc_t desc_r;
-  uint32_t EXTI_Line;
-  uint8_t input_r;
-  uint8_t input_w;
-  //
-  int16_t counter;
+   rotary_encoder_gpio_t pin_s;   //swicth s
+
+   //timer encoder mode
+   TIM_TypeDef* timer_no;  //timer TIM2
+   u8 timer_gpio_af; //GPIO_AF_TIM2
+
+   //external interrupt mode
+   exti_src_gpio_t exti_pin; //interrupt pin
+
+   //reserved: filled by system
+   desc_t desc_r;
+   uint32_t EXTI_Line;
+   uint8_t input_r;
+   uint8_t input_w;
+   //
+   int16_t counter;
+   int16_t counter_limit_min;
+   int16_t counter_limit_max;
+   int16_t counter_step;
 
 }rotary_encoder_info_t;
 

@@ -586,6 +586,14 @@ int dev_hybrid_tube_gpio_ioctl(desc_t desc,int request,va_list ap){
          //Left output from DAC
          GPIO_WriteBit(gpio_switch_source_left_line_ouptut_d2.gpio_bank_no,gpio_switch_source_left_line_ouptut_d2.gpio_pin_no,LINE_OUTPUT_SRC_FROM_DACOUT_LEFT);
       break;
+      
+      //todo
+      case DETECT_JACK_INPUT:
+      break;
+      
+      case DETECT_JACK_OUTPUT:
+      break;
+      
 
    //
    default:

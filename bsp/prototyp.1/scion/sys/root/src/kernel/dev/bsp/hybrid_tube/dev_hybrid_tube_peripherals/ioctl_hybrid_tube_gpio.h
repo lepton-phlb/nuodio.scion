@@ -44,5 +44,8 @@ either the MPL or the [eCos GPL] License."
 #define IN2FX2OUT        0x0001
 #define IN2ADC_DAC2OUT   0x0002
 
+#define  DETECT_JACK_INPUT    0x0011
+#define  DETECT_JACK_OUTPUT   0x0012
+
 
 #endif

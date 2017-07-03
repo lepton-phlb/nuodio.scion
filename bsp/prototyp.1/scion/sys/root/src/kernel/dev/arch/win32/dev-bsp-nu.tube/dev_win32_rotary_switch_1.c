@@ -69,7 +69,7 @@ dev_map_t dev_win32_rotary_switch_1_map = {
    dev_win32_rotary_switch_x_ioctl //ioctl
 };
 
-#define ROTARY_SWITCH_INTERRUPT_NO 32
+#define ROTARY_SWITCH_INTERRUPT_NO 31
 static rotary_switch_info_t  rotary_switch_info_1={
    .rotary_switch_windows_form_name="RotarySwitchControl1",
    .desc_r=INVALID_DESC
@@ -88,7 +88,7 @@ Implementation
 | Comments:
 | See:
 ---------------------------------------------*/
-__hw_interrupt(32, dev_rotary_switch_interrupt) {
+__hw_interrupt(31, dev_rotary_switch_interrupt_1) {
    dev_rotary_switch_x_interrupt(&rotary_switch_info_1);
 }
 
@@ -101,7 +101,7 @@ __hw_interrupt(32, dev_rotary_switch_interrupt) {
 | See:
 ---------------------------------------------*/
 static int dev_win32_rotary_switch_1_load(void) {
-   rotary_switch_info_1.interrupt_no = 32;
+   rotary_switch_info_1.interrupt_no = 31;
    return dev_win32_rotary_switch_x_load(&rotary_switch_info_1);
 }
 

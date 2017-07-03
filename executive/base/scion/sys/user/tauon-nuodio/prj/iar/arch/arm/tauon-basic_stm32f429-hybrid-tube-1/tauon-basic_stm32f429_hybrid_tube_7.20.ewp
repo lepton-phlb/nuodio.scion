@@ -3926,7 +3926,10 @@
             <name>$PROJ_DIR$\..\..\..\..\..\..\..\..\building\output\stm32f4_usb_core\Debug\Lib\stm32f4_usb_core.a</name>
           </file>
           <file>
-            <name>$PROJ_DIR$\..\..\..\..\..\..\..\..\building\output\tauon_7.20\tauon-kernel-cortex-m4-debug\Lib\tauon_7.20.a</name>
+            <name>$PROJ_DIR$\..\..\..\..\..\..\..\..\building\output\tauon_7.80\tauon-kernel-cortex-m4-debug\Lib\tauon_7.80.a</name>
+          </file>
+          <file>
+            <name>$PROJ_DIR$\..\..\..\..\..\..\..\..\building\output\xgui\Debug\Lib\xgui.a</name>
           </file>
         </group>
       </group>
@@ -3937,13 +3940,6 @@
         <name>$PROJ_DIR$\..\..\..\..\..\..\..\root\src\kernel\core\ucore\embOSCXM4_386\Lib\os7m_tl__sp.a</name>
         <excluded>
           <configuration>freertos-debug</configuration>
-        </excluded>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\..\..\..\root\prj\iar\arch\arm\tauon\tauon-kernel-cortex-m4f-freertos-debug\Exe\tauon_7.20.a</name>
-        <excluded>
-          <configuration>Debug</configuration>
-          <configuration>bootloader</configuration>
         </excluded>
       </file>
     </group>

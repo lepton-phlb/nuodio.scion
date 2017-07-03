@@ -33,7 +33,16 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\src\kernel\dev\arch\win32\dev-bsp-nu.tube\dev_win32_rotary_switch_1.c">
+    <ClCompile Include="..\..\..\..\..\..\..\..\..\..\..\..\..\..\..\tauon\sys\root\src\kernel\dev\arch\win32\dev-bsp-nu.tube\dev_win32_rotary_switch_1.c">
+      <Filter>kernel\dev\arch\win32\dev-bsp-nu.tube</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\..\..\..\..\..\..\..\..\..\tauon\sys\root\src\kernel\dev\arch\win32\dev-bsp-nu.tube\dev_win32_rotary_switch_2.c">
+      <Filter>kernel\dev\arch\win32\dev-bsp-nu.tube</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\..\..\..\..\..\..\..\..\..\tauon\sys\root\src\kernel\dev\arch\win32\dev-bsp-nu.tube\dev_win32_rotary_switch_3.c">
+      <Filter>kernel\dev\arch\win32\dev-bsp-nu.tube</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\..\..\..\..\..\..\..\..\..\tauon\sys\root\src\kernel\dev\arch\win32\dev-bsp-nu.tube\dev_win32_rotary_switch_4.c">
       <Filter>kernel\dev\arch\win32\dev-bsp-nu.tube</Filter>
     </ClCompile>
   </ItemGroup>

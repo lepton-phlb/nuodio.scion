@@ -14,11 +14,15 @@ Compiler Directive
    #include "kernel/core/ucore/freeRTOS_8-0-0/source/arch/cortex-m4/stm32f4/FreeRTOSConfig.h"
 #endif 
 
-//force definition of external clock (8MHz) on discovery board (see in stm32f4xx.h)
-#define HSE_VALUE    ((uint32_t)8000000)
+
+//see in kernel\dev\arch\cortexm\stm32f4xx\cubemx_hal_driver\inc\legacy\stm32f4xx_hal_conf.h
+//force definition ST cpu target type
 #ifndef STM32F429xx
    #define STM32F429xx
 #endif
+//force definition of external clock (8MHz) on discovery board (see in stm32f4xx.h)
+#define HSE_VALUE    ((uint32_t)8000000)
+
 //force definition of cpu device
 #define __tauon_cpu_device__ __tauon_cpu_device_cortexM4_stm32f4__
 
@@ -28,6 +32,7 @@ Compiler Directive
 
 //rootfs 
 #define __KERNEL_RTFS_NODETBL_SIZE 60
+#define __KERNEL_RTFS_NODE_BLOCK_NB_MAX 64
 #define __KERNEL_RTFS_BLOCK_SIZE 16
 #define __KERNEL_RTFS_MAX_FILENAME 8
 

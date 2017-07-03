@@ -81,11 +81,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <None Include="lepton_com.conf" />
     <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\..\..\..\..\root\src\bin\test2.c" />
     <ClCompile Include="..\..\..\..\..\..\..\..\root\src\kernel\core\arch\win32\bin_mkconf.c" />
     <ClCompile Include="..\..\..\..\..\..\..\..\root\src\kernel\core\arch\win32\dev_dskimg.c" />
     <ClCompile Include="..\..\..\..\..\..\..\..\root\src\kernel\core\arch\win32\dev_mkconf.c" />
@@ -97,7 +95,9 @@
   </ItemGroup>
   <ItemGroup>
     <Library Include="..\..\..\..\..\..\..\..\root\prj\vc-2010\kernel\Debug\kernel.lib" />
+    <Library Include="..\Debug\bin-nuodio.lib" />
     <Library Include="..\Debug\dev-bsp-nu.tube.lib" />
+    <Library Include="..\Debug\xgui.lib" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
