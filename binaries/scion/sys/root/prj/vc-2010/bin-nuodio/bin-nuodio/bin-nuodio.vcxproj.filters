@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Fichiers sources">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Fichiers de ressources">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="root">
+      <UniqueIdentifier>{f8d4c8e4-35dc-4b59-8620-be502db1c8bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="root\bin">
+      <UniqueIdentifier>{2ac3d0a3-49e4-4316-a1a9-0cd33200c33b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="root\bin\nuodio">
+      <UniqueIdentifier>{c9da6695-c846-4a39-9fbe-508843366c9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="root\bin\nuodio\nu">
+      <UniqueIdentifier>{90b5350e-de33-4a03-a7d1-97835d0cc01e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="root\bin\nuodio\nu\displays">
+      <UniqueIdentifier>{2c77b53f-ed56-4c05-b375-d468586d526b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="root\bin\nuodio\nu\displays\bitmaps">
+      <UniqueIdentifier>{1da47e95-f6ef-4bad-9a45-5e850f480a39}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\src\bin\nuodio\nu\nu.c">
+      <Filter>root\bin\nuodio\nu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\src\bin\test2.c">
+      <Filter>root\bin</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\src\bin\nuodio\nu\displays\nu_display_main.c">
+      <Filter>root\bin\nuodio\nu\displays</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\src\bin\nuodio\nu\displays\bitmaps\label_0.c">
+      <Filter>root\bin\nuodio\nu\displays\bitmaps</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\src\bin\nuodio\nu\displays\bitmaps\label_1.c">
+      <Filter>root\bin\nuodio\nu\displays\bitmaps</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\src\bin\nuodio\nu\displays\bitmaps\label_2.c">
+      <Filter>root\bin\nuodio\nu\displays\bitmaps</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\src\bin\nuodio\nu\displays\bitmaps\label_3.c">
+      <Filter>root\bin\nuodio\nu\displays\bitmaps</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\src\bin\nuodio\nu\displays\bitmaps\label_4.c">
+      <Filter>root\bin\nuodio\nu\displays\bitmaps</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\src\bin\nuodio\nu\displays\bitmaps\label_5.c">
+      <Filter>root\bin\nuodio\nu\displays\bitmaps</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\src\bin\nuodio\nu\displays\bitmaps\label_6.c">
+      <Filter>root\bin\nuodio\nu\displays\bitmaps</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\src\bin\nuodio\nu\displays\bitmaps\label_7.c">
+      <Filter>root\bin\nuodio\nu\displays\bitmaps</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\src\bin\nuodio\nu\displays\bitmaps\label_8.c">
+      <Filter>root\bin\nuodio\nu\displays\bitmaps</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\src\bin\nuodio\nu\displays\bitmaps\label_9.c">
+      <Filter>root\bin\nuodio\nu\displays\bitmaps</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\src\bin\nuodio\nu\displays\bitmaps\label_bluetooth.c">
+      <Filter>root\bin\nuodio\nu\displays\bitmaps</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\src\bin\nuodio\nu\displays\bitmaps\label_fuzz.c">
+      <Filter>root\bin\nuodio\nu\displays\bitmaps</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\src\bin\nuodio\nu\displays\bitmaps\label_ge_tube.c">
+      <Filter>root\bin\nuodio\nu\displays\bitmaps</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\src\bin\nuodio\nu\displays\bitmaps\label_level.c">
+      <Filter>root\bin\nuodio\nu\displays\bitmaps</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\src\bin\nuodio\nu\displays\bitmaps\label_sat.c">
+      <Filter>root\bin\nuodio\nu\displays\bitmaps</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\src\bin\nuodio\nu\displays\bitmaps\label_si_tube.c">
+      <Filter>root\bin\nuodio\nu\displays\bitmaps</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\src\bin\nuodio\nu\displays\bitmaps\label_silicium.c">
+      <Filter>root\bin\nuodio\nu\displays\bitmaps</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\src\bin\nuodio\nu\displays\bitmaps\label_tone.c">
+      <Filter>root\bin\nuodio\nu\displays\bitmaps</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\src\bin\nuodio\nu\displays\bitmaps\label_tube.c">
+      <Filter>root\bin\nuodio\nu\displays\bitmaps</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\src\bin\nuodio\nu\displays\bitmaps\label_tube_ge.c">
+      <Filter>root\bin\nuodio\nu\displays\bitmaps</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\src\bin\nuodio\nu\displays\bitmaps\label_tube_si.c">
+      <Filter>root\bin\nuodio\nu\displays\bitmaps</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\src\bin\nuodio\nu\displays\bitmaps\label_germanium.c">
+      <Filter>root\bin\nuodio\nu\displays\bitmaps</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\..\lepton\rootstock-mainline\depots\nuodio\hybrid.tube\master\binaries\scion\sys\root\src\bin\nuodio\nu\displays\bitmaps\label_interface_full_fat.c">
+      <Filter>root\bin\nuodio\nu\displays\bitmaps</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\..\lepton\rootstock-mainline\depots\nuodio\hybrid.tube\master\binaries\scion\sys\root\src\bin\nuodio\nu\displays\bitmaps\label_interface_full_thin.c">
+      <Filter>root\bin\nuodio\nu\displays\bitmaps</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\src\bin\nuodio\nu\nu.h">
+      <Filter>root\bin\nuodio\nu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\bin\nuodio\nu\displays\nu_displays_definition.h">
+      <Filter>root\bin\nuodio\nu\displays</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
