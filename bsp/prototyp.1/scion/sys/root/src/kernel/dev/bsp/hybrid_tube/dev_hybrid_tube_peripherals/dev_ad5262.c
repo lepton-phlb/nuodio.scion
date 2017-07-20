@@ -29,6 +29,7 @@ either the MPL or the [eCos GPL] License."
 /*============================================
 | Includes
 ==============================================*/
+#include <stdint.h>
 
 #include "kernel/core/kernelconf.h"
 #include "kernel/core/types.h"
@@ -41,7 +42,7 @@ either the MPL or the [eCos GPL] License."
 #include "kernel/core/fcntl.h"
 #include "kernel/core/stat.h"
 #include "kernel/core/cpu.h"
-#include "kernel/fs/vfs/vfsdev.h"
+#include "kernel/fs/vfs/vfstypes.h"
 
 #include "kernel/dev/arch/cortexm/stm32f4xx/driverlib/stm32f4xx.h"
 #include "kernel/dev/arch/cortexm/stm32f4xx/types.h"
@@ -66,7 +67,7 @@ typedef struct ad5262_info_st{
   gpio_info_t pin_shdn;
   gpio_info_t pin_pr;
   //
-  uchar8_t a0; //0: RDAC1, 1:RDAC2 
+  uint8_t a0; //0: RDAC1, 1:RDAC2 
   //
   int16_t resistor_value;
 
@@ -277,7 +278,7 @@ int dev_ad5262_ioctl(desc_t desc,int request,va_list ap){
                   if(rdac_a0<0 || rdac_a0>1)
                      return -1;
                   //
-                  ad5262_info->a0=(uchar8_t)rdac_a0;
+                  ad5262_info->a0=(uint8_t)rdac_a0;
                break;
                
                case GPIO_ARGC+1: //cs

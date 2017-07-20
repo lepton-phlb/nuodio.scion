@@ -12,11 +12,11 @@
 
 <kernel>
       <target name="win32_lepton">
-         <arch include_absolute_path="C:\tauon\sys\user\tauon-nuodio\src/arch/win32/kernel_mkconf/include/user_kernel_mkconf.h" />
+         <arch include_absolute_path="C:\tauon\sys\user\tauon-nuodio\arch/win32/kernel_mkconf/include/user_kernel_mkconf.h" />
       </target>
       
       <target name="cortexm_lepton">
-         <arch include_absolute_path="C:\tauon\sys\user\tauon-nuodio\arch\st-stm32f429-hybrid-tube\kernel_mkconf\include\user_kernel_mkconf.h" />
+         <arch include_absolute_path="C:\tauon\sys\user\tauon-nuodio\arch\st-stm32f429-hybrid-tube\kernel_mkconf\include/user_kernel_mkconf.h" />
       </target>
       
       <!-- cpu type and frequency in MHz or Hz-->
@@ -92,56 +92,71 @@
        <dev name="dev_win32_com0_map" use="on"/>
        <!-- /dev/rtc0 -->
        <dev name="dev_win32_rtc_map" use="on"/>
-       <!-- /dev/eth0 -->
-       <dev name="dev_win32_eth_map" use="on"/>
+       <!-- /dev/kbw32 -->
+       <dev name="dev_win32_kb_map" use="on"/>
+       <!-- /dev/tty0 -->
+       <dev name="dev_tty_map"  use="on"/>
+       <!-- /dev/lcd0 -->
+       <dev name="dev_win32_lcd_matrix_map" use="on"/>
+       <!-- /dev/rotry1 -->
+       <dev name="dev_win32_rotary_switch_1_map" use="on"/>
+       <!-- /dev/rotry2 -->
+       <dev name="dev_win32_rotary_switch_2_map" use="on"/>
+       <!-- /dev/rotry3 -->
+       <dev name="dev_win32_rotary_switch_3_map" use="on"/>
+       <!-- /dev/rotry4 -->
+       <dev name="dev_win32_rotary_switch_4_map" use="on"/>
    </devices>
 </target>
 
 <target name="cortexm_lepton">
    <devices>
-    
       <!-- /dev/cpu0 -->
-      <dev name="dev_stm32f4xx_cpu_x_map"        use="on"/>
+      <dev name="dev_stm32f4xx_cpu_x_map"         use="on"/>
 	    <!-- /dev/board -->
-      <dev name="dev_hybrid_tube_board_map"      use="on"/>
+      <dev name="dev_hybrid_tube_board_map"       use="on"/>
       <!-- /dev/gpio -->
-      <dev name="dev_hybrid_tube_gpio_map"      use="on"/>
+      <dev name="dev_hybrid_tube_gpio_map"        use="on"/>
       <!-- /dev/ttys3 -->
-      <dev name="dev_hybrid_tube_uart_s3_map"   use="on"/>
+      <dev name="dev_hybrid_tube_uart_s3_map"     use="on"/>
       <!-- /dev/spi1 -->
-      <dev name="dev_hybrid_tube_spi_1_map"     use="on"/>
+      <dev name="dev_hybrid_tube_spi_1_map"       use="on"/>
       <!-- /dev/spi4 -->
-      <dev name="dev_hybrid_tube_spi_4_map"     use="on"/>
+      <dev name="dev_hybrid_tube_spi_4_map"       use="on"/>
       <!-- /dev/spi5 -->
-      <dev name="dev_hybrid_tube_spi_5_map"     use="on"/>
+      <dev name="dev_hybrid_tube_spi_5_map"       use="on"/>
       <!-- /dev/spics -->
-      <dev name="dev_hybrid_tube_spi_cs_map"    use="on"/>
+      <dev name="dev_hybrid_tube_spi_cs_map"      use="on"/>
       <!-- /dev/oledio -->
-      <dev name="dev_hybrid_tube_oled_io_map"   use="on"/>
+      <dev name="dev_hybrid_tube_oled_io_map"     use="on"/>
+      <!-- /dev/kbftsw -->
+      <dev name="dev_hybrid_tube_keybfootswitch_map"  use="on"/>
       <!-- /dev/lcd0 -->
-      <dev name="dev_oled_ssd1322_map"          use="on"/>
+      <dev name="dev_oled_ssd1322_map"            use="on"/>
       <!-- /dev/tty0 -->
-      <dev name="dev_tty_map"                   use="on"/>
+      <dev name="dev_tty_map"                     use="on"/>
       <!-- /dev/ad5262 -->
-      <dev name="dev_ad5262_map"                use="on"/>
+      <dev name="dev_ad5262_map"                  use="on"/>
       <!-- /dev/pcm3060 -->
-      <dev name="dev_pcm3060_map"               use="on"/>
+      <dev name="dev_pcm3060_map"                 use="on"/>
       <!-- /dev/i2s3 -->
-      <dev name="dev_stm32f4xx_i2s_3_map"       use="on"/>
-       <!-- /dev/usbaudio -->
-      <dev name="dev_usb_audio_core_map"      use="on"/>
+      <dev name="dev_stm32f4xx_i2s_3_map"         use="on"/>
+      <!-- /dev/usbaudio -->
+      <dev name="dev_usb_audio_core_map"          use="on"/>
       <!-- /dev/rotry1 -->
-      <dev name="dev_rotary_encoder_1_map"      use="on"/>
+      <dev name="dev_rotary_encoder_1_map"        use="on"/>
       <!-- /dev/rotry2 -->
-      <dev name="dev_rotary_encoder_2_map"      use="on"/>
+      <dev name="dev_rotary_encoder_2_map"        use="on"/>
       <!-- /dev/rotry3 -->
-      <dev name="dev_rotary_encoder_3_map"      use="on"/>
+      <dev name="dev_rotary_encoder_3_map"        use="on"/>
       <!-- /dev/rotry4 -->
-      <dev name="dev_rotary_encoder_4_map"      use="on"/>
+      <dev name="dev_rotary_encoder_4_map"        use="on"/>
 	    <!-- /dev/itm0 -->
-      <dev name="dev_cmsis_itm0_map"            use="on"/>
+      <dev name="dev_cmsis_itm0_map"              use="on"/>
 	    <!-- /dev/debug -->
-      <dev name="dev_os_debug_map"              use="on"/>
+      <dev name="dev_os_debug_map"                use="on"/>
+      <!-- /dev/sdio0 -->
+      <dev name="dev_hybrid_tube_sdio_map"        use="on"/>
    </devices>
 </target>
 
@@ -161,7 +176,7 @@
 
 <target name="cortexm_lepton">
         <boot dest_path="C:\tauon\sys\user\tauon-nuodio\etc">
-            <command arg="initd -i /dev/console -o /dev/console" />
+        <command arg="initd -i /dev/console -o /dev/console" />
 				<!--command arg="initd -i /dev/debug -o /dev/debug" /-->
         </boot>
 </target>
@@ -189,6 +204,7 @@
    <bin name="rm"       stack="2048"    priority="100" timeslice="1" />
    <bin name="od"       stack="2048"    priority="100" timeslice="1" />
    <bin name="date"     stack="2048"    priority="100" timeslice="1" />
+   <bin name="sleep"    stack="2048"    priority="100" timeslice="1" />
    <bin name="echo"     stack="2048"    priority="100" timeslice="1" />
    <bin name="stty"     stack="2048"    priority="100" timeslice="1" />
 </binaries>
@@ -196,22 +212,40 @@
 
 <!-- user binaries. -->
 <!-- /usr/bin -->
-<binaries src_path="bin" dest_path="bin">
-        <bin name="tstboard"        stack="2048"    priority="50"  timeslice="1" />
-        <bin name="adda"            stack="2048"    priority="130"  timeslice="1" />
-        <bin name="tstusb"          stack="2048"    priority="130"  timeslice="1" />
-        <!--bin name="udpsrvd"      stack="2048"    priority="10" timeslice="5" /-->
-</binaries>
+<target name="win32_lepton">
+  <binaries src_path="bin" dest_path="bin">
+    <!--bin name="test2"        stack="1024"    priority="100" timeslice="5" /-->
+    <bin name="nu"            stack="2048"    priority="130"  timeslice="1" />
+  </binaries>
+  <!-- /usr/bin -->
+  <binaries src_path="bin/nuodio" dest_path="bin/nuodio">
+          <bin name="nu"            stack="2048"    priority="130"  timeslice="1" />
+  </binaries>
+</target>
 
-<!-- /usr/bin -->
-<binaries src_path="bin/nuodio" dest_path="bin/nuodio">
-        <bin name="tstboard"        stack="2048"    priority="100"  timeslice="5" />
-</binaries>
+
+<target name="cortexm_lepton">
+  <binaries src_path="bin" dest_path="bin">
+          <bin name="tstboard"        stack="2048"    priority="50"  timeslice="1" />
+          <bin name="adda"            stack="2048"    priority="130"  timeslice="1" />
+          <bin name="tstusb"          stack="2048"    priority="130"  timeslice="1" />
+          <bin name="boot"            stack="2048"    priority="130"  timeslice="1" />
+          <!--bin name="udpsrvd"      stack="2048"    priority="10" timeslice="5" /-->
+  </binaries>
+
+  <!-- /usr/bin -->
+  <binaries src_path="bin/nuodio" dest_path="bin/nuodio">
+          <bin name="tstboard"        stack="2048"    priority="100"  timeslice="5" />
+          <bin name="nu"              stack="2048"    priority="130"  timeslice="1" />
+  </binaries>
+</target>
+
+
 
 <files>
    <!-- /usr/etc  (hda internal flash mount on /bin) -->
    <target name="win32_lepton">
-      <file name=".init"      src_file="C:\tauon\sys\user\tauon-nuodio\etc\.init_win32_with_net"      dest_path="etc" />
+      <file name=".init"      src_file="C:\tauon\sys\user\tauon-nuodio\etc\.init_win32"      dest_path="etc" />
    </target>
     <target name="cortexm_lepton">
       <file name=".init"      src_file="C:\tauon\sys\user\tauon-nuodio\etc\.init_nuodio_test"  dest_path="etc" />

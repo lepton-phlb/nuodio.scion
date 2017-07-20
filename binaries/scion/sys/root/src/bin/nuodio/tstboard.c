@@ -29,6 +29,8 @@ either the MPL or the [eCos GPL] License."
 /*===========================================
 Includes
 =============================================*/
+#include <stdint.h>
+
 #include "kernel/core/kernelconf.h"
 #include "kernel/core/system.h"
 #include "kernel/core/signal.h"
@@ -95,16 +97,16 @@ int tstboard_main(int argc,char* argv[]){
    int fd_usbaudio;
    
    
-   uchar8_t rotary_switch1=0;
-   uchar8_t rotary_switch2=0;
-   uchar8_t rotary_switch3=0;
-   uchar8_t rotary_switch4=0;
+   uint8_t rotary_switch1=0;
+   uint8_t rotary_switch2=0;
+   uint8_t rotary_switch3=0;
+   uint8_t rotary_switch4=0;
    
    int timeout=1000;
    struct timeval time_out;
    fd_set readfs;
    
-   uchar8_t u8_resistor;
+   uint8_t u8_resistor;
    
    
    //

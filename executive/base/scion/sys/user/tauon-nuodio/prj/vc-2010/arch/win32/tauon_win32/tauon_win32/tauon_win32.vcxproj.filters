@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <None Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="root">
+      <UniqueIdentifier>{d738653d-e370-4910-9167-77e8f914cdd6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="root\kernel">
+      <UniqueIdentifier>{2f4e74c6-7af3-4a5b-bc94-061bfde45825}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="root\kernel\core">
+      <UniqueIdentifier>{8dd9e3d1-052d-4ac2-97d8-424ea6936b1c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="root\kernel\core\ucore">
+      <UniqueIdentifier>{534dfaf2-d293-4655-906b-8a8deffa4c02}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="root\kernel\core\ucore\embOSWIN32_100">
+      <UniqueIdentifier>{e44608ea-8a5d-4aef-8e50-1cd71d69fedc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="root\kernel\core\arch">
+      <UniqueIdentifier>{b0d8a991-0134-475a-8672-7a6049ffec96}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="root\kernel\core\arch\win32">
+      <UniqueIdentifier>{c43821de-781d-41f4-896d-2cc0e1dd85e3}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\..\..\..\..\root\src\kernel\core\ucore\embOSW32_100\main.c">
+      <Filter>root\kernel\core\ucore\embOSWIN32_100</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\..\..\root\src\kernel\core\arch\win32\bin_mkconf.c">
+      <Filter>root\kernel\core\arch\win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\..\..\root\src\kernel\core\arch\win32\dev_dskimg.c">
+      <Filter>root\kernel\core\arch\win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\..\..\root\src\kernel\core\arch\win32\dev_mkconf.c">
+      <Filter>root\kernel\core\arch\win32</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\..\..\..\..\root\src\kernel\core\arch\win32\kernel_mkconf.h">
+      <Filter>root\kernel\core\arch\win32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\..\..\root\src\kernel\core\arch\win32\dev_dskimg.h">
+      <Filter>root\kernel\core\arch\win32</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="..\..\..\..\..\..\..\..\root\prj\vc-2010\kernel\Debug\kernel.lib" />
+    <Library Include="..\Debug\dev-bsp-nu.tube.lib" />
+    <Library Include="..\Debug\xgui.lib" />
+    <Library Include="..\Debug\bin-nuodio.lib" />
+  </ItemGroup>
+</Project>

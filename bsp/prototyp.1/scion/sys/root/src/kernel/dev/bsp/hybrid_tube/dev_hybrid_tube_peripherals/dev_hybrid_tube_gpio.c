@@ -29,6 +29,8 @@ either the MPL or the [eCos GPL] License."
 /*===========================================
 Includes
 =============================================*/
+#include <stdint.h>
+
 #include "kernel/core/kernelconf.h"
 #include "kernel/core/types.h"
 #include "kernel/core/interrupt.h"
@@ -39,7 +41,7 @@ Includes
 #include "kernel/core/fcntl.h"
 #include "kernel/core/stat.h"
 #include "kernel/core/cpu.h"
-#include "kernel/fs/vfs/vfsdev.h"
+#include "kernel/fs/vfs/vfstypes.h"
 
 #include "kernel/dev/arch/cortexm/stm32f4xx/driverlib/stm32f4xx.h"
 #include "kernel/dev/arch/cortexm/stm32f4xx/types.h"
@@ -584,6 +586,14 @@ int dev_hybrid_tube_gpio_ioctl(desc_t desc,int request,va_list ap){
          //Left output from DAC
          GPIO_WriteBit(gpio_switch_source_left_line_ouptut_d2.gpio_bank_no,gpio_switch_source_left_line_ouptut_d2.gpio_pin_no,LINE_OUTPUT_SRC_FROM_DACOUT_LEFT);
       break;
+      
+      //todo
+      case DETECT_JACK_INPUT:
+      break;
+      
+      case DETECT_JACK_OUTPUT:
+      break;
+      
 
    //
    default:

@@ -14,11 +14,15 @@ Compiler Directive
    #include "kernel/core/ucore/freeRTOS_8-0-0/source/arch/cortex-m4/stm32f4/FreeRTOSConfig.h"
 #endif 
 
-//force definition of external clock (8MHz) on discovery board (see in stm32f4xx.h)
-#define HSE_VALUE    ((uint32_t)8000000)
+
+//see in kernel\dev\arch\cortexm\stm32f4xx\cubemx_hal_driver\inc\legacy\stm32f4xx_hal_conf.h
+//force definition ST cpu target type
 #ifndef STM32F429xx
    #define STM32F429xx
 #endif
+//force definition of external clock (8MHz) on discovery board (see in stm32f4xx.h)
+#define HSE_VALUE    ((uint32_t)8000000)
+
 //force definition of cpu device
 #define __tauon_cpu_device__ __tauon_cpu_device_cortexM4_stm32f4__
 
@@ -28,12 +32,14 @@ Compiler Directive
 
 //rootfs 
 #define __KERNEL_RTFS_NODETBL_SIZE 60
+#define __KERNEL_RTFS_NODE_BLOCK_NB_MAX 64
 #define __KERNEL_RTFS_BLOCK_SIZE 16
 #define __KERNEL_RTFS_MAX_FILENAME 8
 
 //force EFFS for stm32f407 on olimex-stm32-p407 board
 #define __file_system_profile__  __file_system_profile_classic__
 #define __KERNEL_VFS_SUPPORT_EFFS   0
+#define __KERNEL_VFS_SUPPORT_FATFS  1
 
 //kernel printk on /dev/console
 #define __KERNEL_PRINTK
@@ -41,6 +47,11 @@ Compiler Directive
 #define __KERNEL_TRACE_PRINTK
 //kernel console for initd and printk dev output on /dev/console stream
 #define __KERNEL_DEV_TTY "/dev/ttys3"
+
+//kernel usb core specific definition
+#define __KERNEL_USB_CORE_MANUFACTURER_STRING   "nuodio"
+#define __KERNEL_USB_CORE_PRODUCT_STRING        "nuodio tube"
+#define __KERNEL_USB_CORE_SERIALNUMBER_STRING   "000000000020"  
 
 //ip stack
 //#define USE_UIP 

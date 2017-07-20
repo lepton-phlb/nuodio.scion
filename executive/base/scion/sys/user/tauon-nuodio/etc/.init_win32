@@ -1,0 +1,2 @@
+#nuodio hybride tube prototyp.1.
+mount /dev/tty0 /dev/lcd0 /dev/tty0.0

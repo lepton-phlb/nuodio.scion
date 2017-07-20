@@ -1,0 +1,12 @@
+#nuodio hybride tube prototyp.1.
+uname -a
+mount /dev/oledio /dev/spi5 /dev/spi5.0
+mount /dev/lcd0 /dev/spi5.0 /dev/lcd0.0
+mount /dev/tty0 /dev/lcd0.0 /dev/tty0.0
+#
+#spi1.0
+mount /dev/head /dev/spi1 /dev/spi1.0
+#spi4.0
+mount /dev/head /dev/spi4 /dev/spi4.0
+#
+nuboot jumpflash > /dev/lcd0.0

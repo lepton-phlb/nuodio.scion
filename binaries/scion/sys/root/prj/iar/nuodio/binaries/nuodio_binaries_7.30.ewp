@@ -77,7 +77,7 @@
         </option>
         <option>
           <name>OGLastSavedByProductVersion</name>
-          <state>7.40.3.8937</state>
+          <state>7.80.4.12487</state>
         </option>
         <option>
           <name>GeneralEnableMisra</name>
@@ -127,7 +127,7 @@
         </option>
         <option>
           <name>GBECoreSlave</name>
-          <version>22</version>
+          <version>24</version>
           <state>39</state>
         </option>
         <option>
@@ -144,7 +144,7 @@
         </option>
         <option>
           <name>CoreVariant</name>
-          <version>22</version>
+          <version>24</version>
           <state>39</state>
         </option>
         <option>
@@ -167,7 +167,7 @@
         </option>
         <option>
           <name>GFPUCoreSlave2</name>
-          <version>22</version>
+          <version>24</version>
           <state>39</state>
         </option>
       </data>
@@ -659,7 +659,7 @@
       <name>ILINK</name>
       <archiveVersion>0</archiveVersion>
       <data>
-        <version>16</version>
+        <version>18</version>
         <wantNonLocal>1</wantNonLocal>
         <debug>1</debug>
         <option>
@@ -931,7 +931,7 @@
         </option>
         <option>
           <name>CrcAlgorithm</name>
-          <version>0</version>
+          <version>1</version>
           <state>1</state>
         </option>
         <option>
@@ -942,6 +942,14 @@
         <option>
           <name>IlinkThreadsSlave</name>
           <state>1</state>
+        </option>
+        <option>
+          <name>IlinkLogCallGraph</name>
+          <state>0</state>
+        </option>
+        <option>
+          <name>IlinkIcfFile_AltDefault</name>
+          <state></state>
         </option>
       </data>
     </settings>
@@ -1097,7 +1105,7 @@
         </option>
         <option>
           <name>GBECoreSlave</name>
-          <version>22</version>
+          <version>24</version>
           <state>1</state>
         </option>
         <option>
@@ -1114,7 +1122,7 @@
         </option>
         <option>
           <name>CoreVariant</name>
-          <version>22</version>
+          <version>24</version>
           <state>0</state>
         </option>
         <option>
@@ -1137,7 +1145,7 @@
         </option>
         <option>
           <name>GFPUCoreSlave2</name>
-          <version>22</version>
+          <version>24</version>
           <state>0</state>
         </option>
       </data>
@@ -1614,7 +1622,7 @@
       <name>ILINK</name>
       <archiveVersion>0</archiveVersion>
       <data>
-        <version>16</version>
+        <version>18</version>
         <wantNonLocal>1</wantNonLocal>
         <debug>0</debug>
         <option>
@@ -1886,7 +1894,7 @@
         </option>
         <option>
           <name>CrcAlgorithm</name>
-          <version>0</version>
+          <version>1</version>
           <state>1</state>
         </option>
         <option>
@@ -1897,6 +1905,14 @@
         <option>
           <name>IlinkThreadsSlave</name>
           <state>1</state>
+        </option>
+        <option>
+          <name>IlinkLogCallGraph</name>
+          <state>0</state>
+        </option>
+        <option>
+          <name>IlinkIcfFile_AltDefault</name>
+          <state></state>
         </option>
       </data>
     </settings>
@@ -1931,6 +1947,135 @@
     <name>bin</name>
     <group>
       <name>nuodio</name>
+      <group>
+        <name>nu</name>
+        <group>
+          <name>displays</name>
+          <group>
+            <name>bitmaps</name>
+            <file>
+              <name>$PROJ_DIR$\..\..\..\..\src\bin\nuodio\nu\displays\bitmaps\gui.h</name>
+            </file>
+            <file>
+              <name>$PROJ_DIR$\..\..\..\..\src\bin\nuodio\nu\displays\bitmaps\label_0.c</name>
+            </file>
+            <file>
+              <name>$PROJ_DIR$\..\..\..\..\src\bin\nuodio\nu\displays\bitmaps\label_1.c</name>
+            </file>
+            <file>
+              <name>$PROJ_DIR$\..\..\..\..\src\bin\nuodio\nu\displays\bitmaps\label_2.c</name>
+            </file>
+            <file>
+              <name>$PROJ_DIR$\..\..\..\..\src\bin\nuodio\nu\displays\bitmaps\label_3.c</name>
+            </file>
+            <file>
+              <name>$PROJ_DIR$\..\..\..\..\src\bin\nuodio\nu\displays\bitmaps\label_4.c</name>
+            </file>
+            <file>
+              <name>$PROJ_DIR$\..\..\..\..\src\bin\nuodio\nu\displays\bitmaps\label_5.c</name>
+            </file>
+            <file>
+              <name>$PROJ_DIR$\..\..\..\..\src\bin\nuodio\nu\displays\bitmaps\label_6.c</name>
+            </file>
+            <file>
+              <name>$PROJ_DIR$\..\..\..\..\src\bin\nuodio\nu\displays\bitmaps\label_7.c</name>
+            </file>
+            <file>
+              <name>$PROJ_DIR$\..\..\..\..\src\bin\nuodio\nu\displays\bitmaps\label_8.c</name>
+            </file>
+            <file>
+              <name>$PROJ_DIR$\..\..\..\..\src\bin\nuodio\nu\displays\bitmaps\label_9.c</name>
+            </file>
+            <file>
+              <name>$PROJ_DIR$\..\..\..\..\src\bin\nuodio\nu\displays\bitmaps\label_bluetooth.c</name>
+            </file>
+            <file>
+              <name>$PROJ_DIR$\..\..\..\..\src\bin\nuodio\nu\displays\bitmaps\label_fuzz.c</name>
+            </file>
+            <file>
+              <name>$PROJ_DIR$\..\..\..\..\src\bin\nuodio\nu\displays\bitmaps\label_ge_tube.c</name>
+            </file>
+            <file>
+              <name>$PROJ_DIR$\..\..\..\..\src\bin\nuodio\nu\displays\bitmaps\label_germanium.c</name>
+            </file>
+            <file>
+              <name>$PROJ_DIR$\..\..\..\..\src\bin\nuodio\nu\displays\bitmaps\label_interface_full_fat.c</name>
+            </file>
+            <file>
+              <name>$PROJ_DIR$\..\..\..\..\src\bin\nuodio\nu\displays\bitmaps\label_interface_full_thin.c</name>
+            </file>
+            <file>
+              <name>$PROJ_DIR$\..\..\..\..\src\bin\nuodio\nu\displays\bitmaps\label_level.c</name>
+            </file>
+            <file>
+              <name>$PROJ_DIR$\..\..\..\..\src\bin\nuodio\nu\displays\bitmaps\label_sat.c</name>
+            </file>
+            <file>
+              <name>$PROJ_DIR$\..\..\..\..\src\bin\nuodio\nu\displays\bitmaps\label_si_tube.c</name>
+            </file>
+            <file>
+              <name>$PROJ_DIR$\..\..\..\..\src\bin\nuodio\nu\displays\bitmaps\label_silicium.c</name>
+            </file>
+            <file>
+              <name>$PROJ_DIR$\..\..\..\..\src\bin\nuodio\nu\displays\bitmaps\label_tone.c</name>
+            </file>
+            <file>
+              <name>$PROJ_DIR$\..\..\..\..\src\bin\nuodio\nu\displays\bitmaps\label_tube.c</name>
+            </file>
+            <file>
+              <name>$PROJ_DIR$\..\..\..\..\src\bin\nuodio\nu\displays\bitmaps\label_tube_ge.c</name>
+            </file>
+            <file>
+              <name>$PROJ_DIR$\..\..\..\..\src\bin\nuodio\nu\displays\bitmaps\label_tube_si.c</name>
+            </file>
+          </group>
+          <file>
+            <name>$PROJ_DIR$\..\..\..\..\src\bin\nuodio\nu\displays\nu_display_main.c</name>
+          </file>
+          <file>
+            <name>$PROJ_DIR$\..\..\..\..\src\bin\nuodio\nu\displays\nu_displays_definition.h</name>
+          </file>
+        </group>
+        <file>
+          <name>$PROJ_DIR$\..\..\..\..\src\bin\nuodio\nu\nu.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\..\..\..\..\src\bin\nuodio\nu\nu.h</name>
+        </file>
+      </group>
+      <group>
+        <name>nuboot</name>
+        <group>
+          <name>displays</name>
+          <group>
+            <name>bitmaps</name>
+            <file>
+              <name>$PROJ_DIR$\..\..\..\..\src\bin\nuodio\nuboot\displays\bitmaps\gui.h</name>
+            </file>
+            <file>
+              <name>$PROJ_DIR$\..\..\..\..\src\bin\nuodio\nuboot\displays\bitmaps\label_bootloader_nb_icons_copy.c</name>
+            </file>
+            <file>
+              <name>$PROJ_DIR$\..\..\..\..\src\bin\nuodio\nuboot\displays\bitmaps\label_bootloader_nb_message_copy.c</name>
+            </file>
+            <file>
+              <name>$PROJ_DIR$\..\..\..\..\src\bin\nuodio\nuboot\displays\bitmaps\label_bootloader_nb_message_update.c</name>
+            </file>
+            <file>
+              <name>$PROJ_DIR$\..\..\..\..\src\bin\nuodio\nuboot\displays\bitmaps\label_bootloader_nb_progress_bar.c</name>
+            </file>
+            <file>
+              <name>$PROJ_DIR$\..\..\..\..\src\bin\nuodio\nuboot\displays\bitmaps\label_bootloader_nb_progress_element.c</name>
+            </file>
+          </group>
+        </group>
+        <file>
+          <name>$PROJ_DIR$\..\..\..\..\src\bin\nuodio\nuboot\nuboot.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\..\..\..\..\src\bin\nuodio\nuboot\nuboot.h</name>
+        </file>
+      </group>
       <file>
         <name>$PROJ_DIR$\..\..\..\..\src\bin\nuodio\adda.c</name>
         <configuration>
@@ -2196,6 +2341,9 @@
             </data>
           </settings>
         </configuration>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\src\bin\nuodio\boot.c</name>
       </file>
       <file>
         <name>$PROJ_DIR$\..\..\..\..\src\bin\nuodio\tstboard.c</name>
