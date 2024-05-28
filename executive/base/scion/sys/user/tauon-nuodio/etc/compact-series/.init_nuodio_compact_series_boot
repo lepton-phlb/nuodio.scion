@@ -1,0 +1,20 @@
+#nuodio compact series
+uname -a
+mount /dev/oledio /dev/spi5 /dev/spi5.0
+mount /dev/lcd0 /dev/spi5.0 /dev/lcd0.0
+mount /dev/tty0 /dev/lcd0.0 /dev/tty0.0
+
+#on display
+#date > /dev/tty0.0
+echo nuodio-bootloader > /dev/tty0.0
+
+#spi1.0
+mount /dev/head /dev/spi1 /dev/spi1.0
+
+#sdcard
+mkdir /sdcard
+mount -t fatfs /dev/null /sdcard
+
+#gui
+#
+boot jump

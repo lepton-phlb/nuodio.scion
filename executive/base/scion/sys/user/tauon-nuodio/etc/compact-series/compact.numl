@@ -1,0 +1,68 @@
+
+{numl
+    version = [:0.1.0.1]
+}
+
+{! hardware intitialisation !}
+{hardware
+    pot_1 = [mount:"/dev/ad5292 /dev/spi1.0 /dev/g_sat b.8 b.7",  open:"/dev/g_sat" ]
+
+    pot_2 = [mount:"/dev/ad5292 /dev/spi1.0 /dev/g_bass e.6 b.7",   open:"/dev/g_bass" ]
+    pot_3 = [mount:"/dev/ad5292 /dev/spi1.0 /dev/g_middle g.15 b.7", open:"/dev/g_middle" ]
+    pot_4 = [mount:"/dev/ad5292 /dev/spi1.0 /dev/g_treble e.2 b.7", open:"/dev/g_treble" ]
+}
+
+{! hardware initialization at startup !}
+{!
+    {initialization
+        gpio_0 = [:1]
+    }
+!}
+
+{! saturation !}
+{rotary_1   
+    label    =  [name:"saturation"]
+    range    =  [min:0  , max:+15]
+    pot_1    =  [range:255..0]
+}
+
+{! level !}
+{!rotary_2
+    range       =  [min:-15, max:+15, index:0]
+    pot_out     =  [0:32, 1:31, 2:32, 3:33, 4:34, 5:35]
+!}
+{! saturation type 
+  00:clean 01=medium 10:high
+  vbias off
+!}
+{rotary_2
+    range    =      [min:0, max:2, index:0]
+    gpio_2   =      [0:0,      1:1,       2:0]
+    gpio_3   =      [0:0,      1:0,       2:1]
+    gpio_4   =      [0:1,      1:1,       2:1]
+}
+
+{! saturation vbias 
+   case A, case B
+!}
+{!rotary_2_pushed
+    range    =      [min:0, max:10, index:0]
+    gpio_4   =      [0:1,   1:0,  2:0,   3:0,   4:0,   5:0,   6:0,   7:0,   8:0,   9:0,   10:0 ]
+    dac_waveform =  [0:dc,  1:dc, 2:dc,  3:dc,  4:dc,  5:dc,  6:dc,  7:dc,  8:dc,  9:dc,  10:dc]
+    dac_level    =  [range:1..128]
+!}
+
+{! tone !}
+{rotary_3
+    range    =  [min:-15, max:+15, index:0]
+    pot_2   =   [range:250..5]
+    pot_3   =   [range:200..100]
+    pot_4   =   [range:5..250]
+}
+
+{! 
+    nuodio authentication signature hash (generated on nuodio site and check in loading sequence on pedal) 
+!}
+{authentication
+     signature = [hash:"AecFe5678fF"]
+}

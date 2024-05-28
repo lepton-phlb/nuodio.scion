@@ -1,0 +1,42 @@
+#nuodio compact series
+uname -a
+mount /dev/oledio /dev/spi5 /dev/spi5.0
+mount /dev/lcd0 /dev/spi5.0 /dev/lcd0.0
+mount /dev/tty0 /dev/lcd0.0 /dev/tty0.0
+
+#on display
+#date > /dev/tty0.0
+echo nuodio > /dev/tty0.0
+
+#spi1.0
+mount /dev/head /dev/spi1 /dev/spi1.0
+
+#sdcard
+mkdir /sdcard
+mount -t fatfs /dev/null /sdcard
+
+tstboard power on
+
+#potentiometer /sync /reset
+mount /dev/ad5292 /dev/spi1.0 /dev/g_inr c.14 a.2
+mount /dev/ad5292 /dev/spi1.0 /dev/g_inl i.8 a.2
+mount /dev/ad5292 /dev/spi1.0 /dev/g_outr e.3 c.7
+mount /dev/ad5292 /dev/spi1.0 /dev/g_outl b.6 c.7
+#saturation
+#mount /dev/ad5292 /dev/spi1.0 /dev/g_sat b.8 b.7 
+#equalizer
+#mount /dev/ad5292 /dev/spi1.0 /dev/g_bass e.6 b.7 
+#mount /dev/ad5292 /dev/spi1.0 /dev/g_middle g.15 b.7 
+#mount /dev/ad5292 /dev/spi1.0 /dev/g_treble e.2 b.7 
+
+tstboard gain-in 255
+tstboard gain-out 255
+tstboard gain-sat 255
+
+#gui
+#test midi ble
+#midid dev-in /dev/ttys6 dev-out /dev/ttys6 &
+#test midi serial
+#midid dev-in /dev/ttys1 dev-out /dev/ttys1 &
+#gui
+nu >/dev/lcd0.0&
