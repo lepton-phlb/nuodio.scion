@@ -1,4 +1,3 @@
-/dev/kbftsw;
-500;
-0x0F:initd -i /dev/console -o /dev/console /usr/etc/.jumpflash;
-0x02:initd -i /dev/console -o /dev/console /usr/etc/.storage;
+/dev/kb0;
+0;
+0x00:initd -i /dev/ttyp0 -o /dev/ttyp0;
