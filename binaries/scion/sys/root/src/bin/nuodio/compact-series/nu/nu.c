@@ -270,11 +270,12 @@ int nu_main(int argc, char* argv[]) {
    ioctl(nu_xgui.fd_mem,FIONBIO,&on);
    
    //
+#if 0
    if((pid_midid=vfork())==0){
       execl("/usr/bin/midid","/usr/bin/midid","dev-in","/dev/ttys1","dev-out","/dev/ttys1",NULL);
       exit(-1);
    } 
-
+#endif
    //
    xlcd_core_context.xlcd_context.p = &nu_xgui;
    attr.callback = callback_xgui;

@@ -43,11 +43,11 @@ Compiler Directive
 #define __KERNEL_VFS_SUPPORT_FATFS  1
 
 //kernel printk on /dev/console
-#define __KERNEL_PRINTK
+//#define __KERNEL_PRINTK
 //kernel trace_printk on /dev/trace
-#define __KERNEL_TRACE_PRINTK
+//#define __KERNEL_TRACE_PRINTK
 //kernel console for initd and printk dev output on /dev/console stream
-#define __KERNEL_DEV_TTY "/dev/ttys3"
+//#define __KERNEL_DEV_TTY "/dev/ttys3"
 
 
 //specific target include for pinout definition
