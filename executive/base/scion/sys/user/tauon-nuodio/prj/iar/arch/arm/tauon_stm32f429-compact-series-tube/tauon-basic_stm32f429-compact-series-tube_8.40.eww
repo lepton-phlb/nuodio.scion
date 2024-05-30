@@ -74,32 +74,32 @@
         <batchDefinition>
             <name>all bootloader</name>
             <member>
-                <project>bsp_compact_series_7.80</project>
+                <project>bsp_compact_series_8.40</project>
                 <configuration>Debug</configuration>
             </member>
             <member>
-                <project>dev_stm32f4xx_7.20</project>
+                <project>dev_stm32f4xx_8.40</project>
                 <configuration>Debug</configuration>
             </member>
             <member>
-                <project>stm32f4_usb_core</project>
+                <project>nuodio-compact-series_binaries_8.40</project>
                 <configuration>Debug</configuration>
             </member>
             <member>
-                <project>tauon_7.80</project>
+                <project>stm32f4_usb_core_8.40</project>
+                <configuration>Debug</configuration>
+            </member>
+            <member>
+                <project>xgui_8.40</project>
+                <configuration>Debug</configuration>
+            </member>
+            <member>
+                <project>tauon_8.40</project>
                 <configuration>tauon-kernel-cortex-m4-debug</configuration>
             </member>
             <member>
-                <project>xgui</project>
-                <configuration>Debug</configuration>
-            </member>
-            <member>
-                <project>nuodio-compact-series_binaries_7.80</project>
-                <configuration>Debug</configuration>
-            </member>
-            <member>
-                <project>tauon-basic_stm32f429-compact-series-tube_7.80</project>
-                <configuration>bootloader</configuration>
+                <project>tauon-basic_stm32f429-compact-series-tube_8.40</project>
+                <configuration>Debug-Bootloader</configuration>
             </member>
         </batchDefinition>
     </batchBuild>
