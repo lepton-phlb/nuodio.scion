@@ -39,4 +39,4 @@ tstboard gain-sat 255
 #test midi serial
 #midid dev-in /dev/ttys1 dev-out /dev/ttys1 &
 #gui
-nu >/dev/lcd0.0&
+nu </dev/null >/dev/lcd0.0
